@@ -1,3 +1,9 @@
 **/classes/
 **/target/
 **/targetclasses/
+
+*.jar
+
+*.jar
+
+*.gar
