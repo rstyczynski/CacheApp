@@ -11,7 +11,6 @@ cd $CacheAppBase
 cd CacheConfig
 mvn clean 
 mvn package 
-mvn install
 cd ..
 
 cd CacheModel
@@ -24,13 +23,11 @@ cd ..
 cd CacheNode
 mvn clean 
 mvn package 
-mvn install
 cd ..
 
 cd CacheNodeSpring
 mvn clean 
 mvn package 
-mvn install
 cd ..
 
 cd CacheWebClient
