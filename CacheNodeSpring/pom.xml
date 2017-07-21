@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
     <groupId>CacheApp</groupId>
-    <artifactId>CacheNode</artifactId>
+    <artifactId>CacheNodeSpring</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>Cache storage node configuration</description>
+    <description>Cache storage node configuration with Spring integration</description>
     <dependencies>
         <dependency>
             <groupId>com.oracle.adf.library</groupId>
