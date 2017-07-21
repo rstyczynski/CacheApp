@@ -7,6 +7,6 @@
     <cache-configuration-ref>META-INF/trivial-cache-config.xml</cache-configuration-ref>
 --> 
 
-    <cache-configuration-ref>trivial-spring-cache-config.xml</cache-configuration-ref>
+    <cache-configuration-ref>spring-cache-config.xml</cache-configuration-ref>
 
 </coherence-application>

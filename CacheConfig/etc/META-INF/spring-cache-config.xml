@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+              xmlns:spring="class://com.oracle.coherence.spring.SpringNamespaceHandler"
+              xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd               class://com.oracle.coherence.spring.SpringNamespaceHandler coherence-spring-config.xsd">
+    <spring:bean-factory>
+        <spring:application-context-uri>trivial-application-context.xml</spring:application-context-uri>
+    </spring:bean-factory>
+    <defaults>
+        <scope-name>XXX</scope-name>
+    </defaults>
+    <caching-scheme-mapping>
+        <cache-mapping>
+            <cache-name>trivialCache</cache-name>
+            <scheme-name>xeadrName</scheme-name>
+        </cache-mapping>
+    </caching-scheme-mapping>
+    <caching-schemes>
+        <distributed-scheme>
+            <scheme-name>xeadrName</scheme-name>
+            <service-name>trivialService</service-name>
+            <serializer>
+          <instance>
+                    <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                    <init-params>
+                        <init-param>
+                            <param-type>String</param-type>
+                           <!-- <param-value>META-INF/trivial-pof-config.xml</param-value> -->
+                            <param-value>trivial-pof-config.xml</param-value>
+                        </init-param>
+                    </init-params>
+                </instance>
+            </serializer>
+            <backing-map-scheme>
+                <local-scheme>
+                    <listener>
+                        <class-scheme>
+                            <!-- <scheme-ref>springListener</scheme-ref> -->
+                            <spring:bean>
+                                <spring:bean-name>trivialListener</spring:bean-name>
+                            </spring:bean>
+                        </class-scheme>
+                    </listener>
+                </local-scheme>
+            </backing-map-scheme>
+            <autostart>true</autostart>
+        </distributed-scheme>
+        <class-scheme>
+            <scheme-name>springListener</scheme-name>
+            <!-- Replace 3.7 style with spring:bean
+      		<class-name>spring-bean:trivialListener</class-name>
+      		<init-params>
+        		<init-param>
+          			<param-name>setBackingMapManagerContext</param-name>
+          			<param-value>{manager-context}</param-value>
+        		</init-param>
+      		</init-params>
+      -->
+            <spring:bean>
+                <spring:bean-name>trivialListener</spring:bean-name>
+                <!--
+                <spring:property name="backingMapManagerContext">{manager-context}</spring:property>
+                -->
+            </spring:bean>
+        </class-scheme>
+    </caching-schemes>
+</cache-config>

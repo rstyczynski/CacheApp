@@ -56,6 +56,8 @@
    </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
+         <string v="Coherence"/>
+         <string v="Java"/>
          <string v="Maven"/>
          <string v="XML"/>
       </list>
@@ -69,5 +71,14 @@
    <hash n="oracle.jdeveloper.model.J2eeSettings">
       <value n="j2eeWebAppName" v="CacheApp-CacheConfig-webapp"/>
       <value n="j2eeWebContextRoot" v="CacheApp-CacheConfig-context-root"/>
+   </hash>
+   <hash n="oracle.jdeveloper.runner.RunConfigurations">
+      <hash n="runConfigurationDefinitions">
+         <hash n="Default">
+            <value n="custom" v="false"/>
+            <value n="javaOptions" v="-Dtangosol.coherence.cacheconfig=&quot;/Users/rstyczynski/Documents/SELEX/Leonardo072017/CacheApp/CacheConfig/src/META-INF/coherence-cache-config.xml&quot;"/>
+            <value n="name" v="Default"/>
+         </hash>
+      </hash>
    </hash>
 </jpr:project>
