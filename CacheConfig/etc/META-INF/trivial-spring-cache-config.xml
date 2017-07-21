@@ -6,9 +6,11 @@
     <spring:bean-factory>
         <spring:application-context-uri>META-INF/trivial-application-context.xml</spring:application-context-uri>
     </spring:bean-factory>
+    
     <defaults>
         <scope-name>trivial-scope</scope-name>
     </defaults>
+
     <caching-scheme-mapping>
         <cache-mapping>
             <cache-name>trivialCache</cache-name>
