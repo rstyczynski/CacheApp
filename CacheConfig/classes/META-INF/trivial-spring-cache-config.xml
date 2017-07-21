@@ -4,10 +4,10 @@
               xmlns:spring="class://com.oracle.coherence.spring.SpringNamespaceHandler"
               xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd               class://com.oracle.coherence.spring.SpringNamespaceHandler coherence-spring-config.xsd">
     <spring:bean-factory>
-        <spring:application-context-uri>application-context.xml</spring:application-context-uri>
+        <spring:application-context-uri>META-INF/trivial-application-context.xml</spring:application-context-uri>
     </spring:bean-factory>
     <defaults>
-        <scope-name>XXX</scope-name>
+        <scope-name>trivial-scope</scope-name>
     </defaults>
     <caching-scheme-mapping>
         <cache-mapping>
