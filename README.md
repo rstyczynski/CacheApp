@@ -10,7 +10,9 @@ CacheAppBase=>>>project directory put here<<<
 cd $CacheAppBase
 
 cd CacheConfig
-mvn clean install
+mvn clean 
+mvn install
+mvn package 
 cd ..
 
 cd CacheNode
@@ -20,6 +22,7 @@ mvn package
 cd ..
 
 cd CacheWebClient
+mvn clean 
 mvn package
 cd ..
 
