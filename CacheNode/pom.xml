@@ -4,7 +4,7 @@
     <groupId>CacheApp</groupId>
     <artifactId>CacheNode</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>Project for CacheNode</description>
+    <description>Cache storage node configuration</description>
     <dependencies>
         <dependency>
             <groupId>com.oracle.adf.library</groupId>
@@ -29,6 +29,7 @@
             <version>4.3.8.RELEASE</version>
         </dependency>
     </dependencies>
+    
     <build>
         <sourceDirectory>src/</sourceDirectory>
         <resources>
@@ -38,6 +39,8 @@
         </resources>
         <outputDirectory>${project.build.directory}/classes/</outputDirectory>
         <plugins>
+        
+        <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -64,8 +67,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <!-- <classpathPrefix>lib</classpathPrefix> -->
-                            <!-- <mainClass>test.org.Cliente</mainClass> -->
+
                         </manifest>
                         <manifestEntries>
                             <Class-Path>lib/</Class-Path>
@@ -73,6 +75,7 @@
                     </archive>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>com.coderplus.maven.plugins</groupId>
                 <artifactId>copy-rename-maven-plugin</artifactId>

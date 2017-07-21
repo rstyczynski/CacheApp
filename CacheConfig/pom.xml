@@ -4,7 +4,7 @@
   <groupId>CacheApp</groupId>
   <artifactId>CacheConfig</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <description>Project for CacheConfig</description>
+  <description>Cache configuration</description>
   <build>
     <sourceDirectory>src/</sourceDirectory>
     <resources>
@@ -20,7 +20,7 @@
         <directory>etc/</directory>
       </resource>
     </resources>
-    <outputDirectory>classes/</outputDirectory>
+    <outputDirectory>${project.build.directory}/classes/</outputDirectory>
   </build>
   <dependencies>
   </dependencies>
