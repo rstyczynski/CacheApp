@@ -1,0 +1,4 @@
+model/TrivialDataRecord.class
+model/TrivialCacheWarmer.class
+model/TrivialCacheDump.class
+model/TrivialListener.class

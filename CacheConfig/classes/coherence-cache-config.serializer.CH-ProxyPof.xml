@@ -1,0 +1,2928 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cache-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config coherence-cache-config.xsd">
+
+
+	<!-- Cache Scheme Mapping -->
+	<caching-scheme-mapping>
+
+		<!-- ######################## WGM ######################## -->
+		<cache-mapping>
+			<cache-name>geoent_cache</cache-name>
+			<scheme-name>WGM_scheme</scheme-name>
+		</cache-mapping>
+
+
+		<!-- ========================= EII =========================== -->
+		<cache-mapping>
+			<cache-name>SystemTrack</cache-name>
+			<scheme-name>systemScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemTrackHistory</cache-name>
+			<scheme-name>systemHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceTrack</cache-name>
+			<scheme-name>sourceScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SeaRoute</cache-name>
+			<scheme-name>seaRouteScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceTrackHistory</cache-name>
+			<scheme-name>sourceHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>Anomaly</cache-name>
+			<scheme-name>anomalyScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CorrelationAnomalyHistory</cache-name>
+			<scheme-name>anomalyHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>MergeAnomalyHistory</cache-name>
+			<scheme-name>anomalyHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VoyageAnomalyHistory</cache-name>
+			<scheme-name>anomalyHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>Sequence</cache-name>
+			<scheme-name>diismSequence</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupRouteStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupTrackInterceptionType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupTrackInterceptionStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSystemTrackStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupVoyageStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSourceTrackStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupActivity</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAisEquipment</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAisNavigationStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAisVersion</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAnomalyStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAnomalyType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupCorrelationMode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupCountryCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupLloydsVesselType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupOthAlarmType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupPriority</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSourceTrackType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSystemTrackType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupTrackCategory</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupTrackClassification</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupTrackCreationMode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>SystemParameter</cache-name>
+			<scheme-name>diismTrefs</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>LookupSmartAgentStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSmartAgentType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSpecialPointType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSmartAgentCurrentPriority</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAlarmStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAlarmType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupVesselType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupFilterType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupAnchorageDepth</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupCargoPierDepth</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupChannelDepth</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupDrydock</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupHarborSizeCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupHarborTypeCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupMaxsizeVesselCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupOilTerminalDepth</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupRailway</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupRegionIndex</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupRepairCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupShelterAffordedCode</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupResolutionReason</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSignificantElementType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+
+		<!-- SmartAgents NamedCache -->
+		<cache-mapping>
+			<cache-name>SmartAgent</cache-name>
+			<scheme-name>smartAgentScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>ConsistencyValidationSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CourseControlSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>GeographicalProximitySmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>NavigationStateControlSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SpeedControlSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VesselIdentitySmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>TargetApproachSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>AreaOfInterestSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SuspiciousBehaviorSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>Filter</cache-name>
+			<scheme-name>filterScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SplitTrackSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CoastalApproachSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>ETADiscrepancySmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VesselsListSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CargoManifestSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>StatusControlSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VoyageInconsistenciesSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>RouteDeviationSmartAgentHistory</cache-name>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+		</cache-mapping>
+
+
+		<!-- Alarms NamedCache -->
+		<cache-mapping>
+			<cache-name>Alarm</cache-name>
+			<scheme-name>alarmScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>ConsistencyValidationAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CourseControlAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>GeographicalProximityAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>NavigationStateControlAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SpeedControlAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VesselIdentityAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>TargetApproachAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>AreaOfInterestAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SuspiciousBehaviorAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SplitTrackAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CoastalApproachAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>ETADiscrepancyAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VesselsListAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CargoManifestAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>StatusControlAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>VoyageInconsistenciesAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>RouteDeviationAlarmHistory</cache-name>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>LloydsShipRegistry</cache-name>
+			<scheme-name>lloydsShipRegistryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemTrackTypeMapping</cache-name>
+			<scheme-name>typeMappingScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>TrackTypeMapping</cache-name>
+			<scheme-name>trackTypeMappingScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>TrackIdentityMapping</cache-name>
+			<scheme-name>typeMappingScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemSPTypeMapping</cache-name>
+			<scheme-name>typeMappingScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemSpecialPoint</cache-name>
+			<scheme-name>systemSPScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemSpecialPointHistory</cache-name>
+			<scheme-name>systemSPHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupEmergencyType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupSpecificTrackType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupGenericTrackType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupObjectType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupWaypointType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupEmergencyStatus</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupIdentity</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>LookupPortFormat</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>Gateway</cache-name>
+			<scheme-name>diismGateway</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceEmergency</cache-name>
+			<scheme-name>diismSourceEmergency</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemEmergency</cache-name>
+			<scheme-name>diismSystemEmergency</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceEmergencyHistory</cache-name>
+			<scheme-name>diismSourceEmergencyHistory</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemEmergencyHistory</cache-name>
+			<scheme-name>diismSystemEmergencyHistory</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceVoyage</cache-name>
+			<scheme-name>sourceVoyage</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>SystemVoyage</cache-name>
+			<scheme-name>systemVoyage</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SystemVoyageHistory</cache-name>
+			<scheme-name>systemVoyageHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SourceVoyageHistory</cache-name>
+			<scheme-name>sourceVoyageHistoryScheme</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>LookupGeographicalAreaGeometryType</cache-name>
+			<scheme-name>diismLookups</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>PolygonGeographicalArea</cache-name>
+			<scheme-name>geographicalAreaScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>PolygonGeographicalAreaHistory</cache-name>
+			<scheme-name>geographicalAreaHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CircleGeographicalArea</cache-name>
+			<scheme-name>geographicalAreaScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CircleGeographicalAreaHistory</cache-name>
+			<scheme-name>geographicalAreaHistoryScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CircularCrownGeographicalArea</cache-name>
+			<scheme-name>geographicalAreaScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>CircularCrownGeographicalAreaHistory</cache-name>
+			<scheme-name>geographicalAreaHistoryScheme</scheme-name>
+		</cache-mapping>
+
+		<!-- SIGNIFICANTLIST -->
+		<cache-mapping>
+			<cache-name>SignificantList</cache-name>
+			<scheme-name>significantListScheme</scheme-name>
+		</cache-mapping>
+
+		<!-- PORTS -->
+		<cache-mapping>
+			<cache-name>Port</cache-name>
+			<scheme-name>portScheme</scheme-name>
+		</cache-mapping>
+
+		<!-- INTERCEPTION ANALYSIS -->
+		<cache-mapping>
+			<cache-name>TrackInterception</cache-name>
+			<scheme-name>interceptionScheme</scheme-name>
+		</cache-mapping>
+
+		<!-- IMAGE -->
+		<cache-mapping>
+			<cache-name>Image</cache-name>
+			<scheme-name>imageScheme</scheme-name>
+		</cache-mapping>
+
+		<!-- LOCKS -->
+		<cache-mapping>
+			<cache-name>IMO</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>MMSI</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>IRCS</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>NAME</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>SOURCEID</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+		<cache-mapping>
+			<cache-name>MULTIPLE_ENTITY</cache-name>
+			<scheme-name>lockScheme</scheme-name>
+		</cache-mapping>
+
+		<cache-mapping>
+			<cache-name>CacheStoreControl</cache-name>
+			<scheme-name>cacheStoreControlScheme</scheme-name>
+		</cache-mapping>
+
+	</caching-scheme-mapping>
+
+
+
+	<!-- Caching Schemes -->
+	<caching-schemes>
+
+		<!-- ######################## WGM ######################## -->
+		<distributed-scheme>
+			<scheme-name>WGM_scheme</scheme-name>
+			<service-name>DistributedCacheEDA</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/wgm-pof-config.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<local-scheme>
+					<scheme-ref>WGM_LocalSizeLimited</scheme-ref>
+				</local-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<local-scheme>
+			<scheme-name>WGM_LocalSizeLimited</scheme-name>
+			<eviction-policy>LRU</eviction-policy>
+		</local-scheme>
+
+
+		<!-- ============================================== EII ============================================== -->
+
+		<distributed-scheme>
+			<scheme-name>significantListScheme</scheme-name>
+			<service-name>significantListCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.significantlist.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>systemScheme</scheme-name>
+			<service-name>systemCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<listener>
+								<class-scheme>
+									<scheme-ref>listenerSystem</scheme-ref>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.system.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>2m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>systemHistoryScheme</scheme-name>
+			<service-name>systemHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.system.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>1m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>sourceScheme</scheme-name>
+			<service-name>sourceCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<listener>
+								<class-scheme>
+									<scheme-ref>listener</scheme-ref>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.source.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>2m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>sourceHistoryScheme</scheme-name>
+			<service-name>sourceHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.source.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>1m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<replicated-scheme>
+			<scheme-name>diismLookups</scheme-name>
+			<service-name>diismLookupsCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<local-scheme />
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</replicated-scheme>
+
+		<replicated-scheme>
+			<scheme-name>diismTrefs</scheme-name>
+			<service-name>diismTrefsCache</service-name>
+
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<local-scheme />
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</replicated-scheme>
+
+		<distributed-scheme>
+			<scheme-name>diismSequence</scheme-name>
+			<service-name>diismSequenceCache</service-name>
+
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>SequenceEb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.identity.sequence.SequenceEb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>anomalyScheme</scheme-name>
+			<service-name>anomalyCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			
+			<thread-count>2</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.MultiJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>CorrelationAnomalyEb, MergeAnomalyEb, VoyageAnomalyEb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.anomalies.CorrelationAnomalyEb,
+										com.leonardo.m000dly0.model.entity.anomalies.MergeAnomalyEb,
+										com.leonardo.m000dly0.model.entity.anomalies.VoyageAnomalyEb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>smartAgentScheme</scheme-name>
+			<service-name>smartAgentCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>1000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.MultiJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>
+										ConsistencyValidationSmartAgentEb,
+										CourseControlSmartAgentEb,
+										GeographicalProximitySmartAgentEb,
+										NavigationStateControlSmartAgentEb,
+										SpeedControlSmartAgentEb,
+										VesselIdentitySmartAgentEb,
+										SplitTrackSmartAgentEb,
+										CoastalApproachSmartAgentEb,
+										TargetApproachSmartAgentEb,
+										SuspiciousBehaviorSmartAgentEb,
+										AreaOfInterestSmartAgentEb,
+										ETADiscrepancySmartAgentEb,
+										VesselsListSmartAgentEb,
+										CargoManifestSmartAgentEb,
+										StatusControlSmartAgentEb,
+										VoyageInconsistenciesSmartAgentEb,
+										RouteDeviationSmartAgentEb
+									</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.smartagents.ConsistencyValidationSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.CourseControlSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.GeographicalProximitySmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.NavigationStateControlSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.SpeedControlSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.VesselIdentitySmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.SplitTrackSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.CoastalApproachSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.TargetApproachSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.SuspiciousBehaviorSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.AreaOfInterestSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.ETADiscrepancySmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.VesselsListSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.CargoManifestSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.StatusControlSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.VoyageInconsistenciesSmartAgentEb,
+										com.leonardo.m000dly0.model.entity.smartagents.RouteDeviationSmartAgentEb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>filterScheme</scheme-name>
+			<service-name>filterCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>1000</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.common.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>smartAgentHistoryScheme</scheme-name>
+			<service-name>smartAgentHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>1000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.smartagents.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>alarmScheme</scheme-name>
+			<service-name>alarmCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.MultiJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>
+										ConsistencyValidationAlarmEb,
+										CourseControlAlarmEb,
+										GeographicalProximityAlarmEb,
+										NavigationStateControlAlarmEb,
+										SpeedControlAlarmEb,
+										VesselIdentityAlarmEb,
+										SplitTrackAlarmEb,
+										CoastalApproachAlarmEb,
+										TargetApproachAlarmEb,
+										SuspiciousBehaviorAlarmEb,
+										AreaOfInterestAlarmEb,
+										ETADiscrepancyAlarmEb,
+										VesselsListAlarmEb,
+										CargoManifestAlarmEb,
+										StatusControlAlarmEb,
+										VoyageInconsistenciesAlarmEb,
+										RouteDeviationAlarmEb
+									</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class list -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.alarms.ConsistencyValidationAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.CourseControlAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.GeographicalProximityAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.NavigationStateControlAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.SpeedControlAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.VesselIdentityAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.SplitTrackAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.CoastalApproachAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.TargetApproachAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.SuspiciousBehaviorAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.AreaOfInterestAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.ETADiscrepancyAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.VesselsListAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.CargoManifestAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.StatusControlAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.VoyageInconsistenciesAlarmEb,
+										com.leonardo.m000dly0.model.entity.alarms.RouteDeviationAlarmEb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>alarmHistoryScheme</scheme-name>
+			<service-name>alarmHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.alarms.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>anomalyHistoryScheme</scheme-name>
+			<service-name>anomalyHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.anomalies.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<replicated-scheme>
+			<scheme-name>typeMappingScheme</scheme-name>
+			<service-name>typeMappingCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<local-scheme />
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</replicated-scheme>
+
+		<replicated-scheme>
+			<scheme-name>trackTypeMappingScheme</scheme-name>
+			<service-name>trackTypeMappingCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<local-scheme />
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+		</replicated-scheme>
+
+		<distributed-scheme>
+			<scheme-name>systemSPScheme</scheme-name>
+			<service-name>systemSPCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+
+							<listener>
+								<class-scheme>
+									<class-name>com.leonardo.m000dfs0.co.listeners.SpecialPointListener</class-name>
+									<init-params>
+										<init-param>
+											<param-type>com.tangosol.net.BackingMapManagerContext</param-type>
+											<param-value>{manager-context}</param-value>
+										</init-param>
+									</init-params>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.sp.system.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>systemSPHistoryScheme</scheme-name>
+			<service-name>systemSPHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.sp.system.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>diismGateway</scheme-name>
+			<service-name>gatewayCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<expiry-delay>10m</expiry-delay>
+						</local-scheme>
+					</internal-cache-scheme>
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>diismSourceEmergency</scheme-name>
+			<service-name>emergencySourceCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<listener>
+								<class-scheme>
+									<scheme-ref>listenerEmergency</scheme-ref>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.emergencies.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>diismSystemEmergency</scheme-name>
+			<service-name>emergencySystemCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<listener>
+								<class-scheme>
+									<scheme-ref>listenerSystemEmergency</scheme-ref>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2000</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.emergencies.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>diismSourceEmergencyHistory</scheme-name>
+			<service-name>emergencySourceHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.emergencies.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>diismSystemEmergencyHistory</scheme-name>
+			<service-name>emergencySystemHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.emergencies.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>sourceVoyage</scheme-name>
+			<service-name>sourceVoyageCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+							<listener>
+								<class-scheme>
+									<scheme-ref>listenerVoyage</scheme-ref>
+								</class-scheme>
+							</listener>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.voyages.source.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>systemVoyage</scheme-name>
+			<service-name>systemVoyageCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>2</thread-count>			
+			
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.voyages.system.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>seaRouteScheme</scheme-name>
+			<service-name>seaRouteCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+					<write-max-batch-size>2500</write-max-batch-size>
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.searoutes.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>systemVoyageHistoryScheme</scheme-name>
+			<service-name>systemVoyageHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.voyages.system.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>sourceVoyageHistoryScheme</scheme-name>
+			<service-name>sourceVoyageHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>22500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.voyages.source.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>lloydsShipRegistryScheme</scheme-name>
+			<service-name>lloydsShipRegistryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>5000</write-max-batch-size>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.ControllableCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the cache name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}</param-value>
+								</init-param>
+								
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.details.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>geographicalAreaScheme</scheme-name>
+			<service-name>geographicalAreaCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>2500</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.geoareas.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>geographicalAreaHistoryScheme</scheme-name>
+			<service-name>geographicalAreaHistoryCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<write-max-batch-size>1000</write-max-batch-size>
+
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.PersistJpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.geoareas.history.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>portScheme</scheme-name>
+			<service-name>portCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			
+			<thread-count>4</thread-count>			
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.leonardo.m000dly0.cache.ControllableCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the cache name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}</param-value>
+								</init-param>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.ports.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+
+		<distributed-scheme>
+			<scheme-name>interceptionScheme</scheme-name>
+			<service-name>interceptionCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			
+			<thread-count>4</thread-count>
+
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+
+					<!-- Define the cache scheme -->
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.analysis.{cache-name}Eb
+									</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>imageScheme</scheme-name>
+			<service-name>imageCache</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<eviction-policy>LRU</eviction-policy>
+							<high-units>10MB</high-units>
+							<unit-calculator>BINARY</unit-calculator>
+							<expiry-delay>2m</expiry-delay>
+						</local-scheme>
+					</internal-cache-scheme>
+					<write-max-batch-size>100</write-max-batch-size>
+					<cachestore-scheme>
+						<class-scheme>
+							<class-name>com.tangosol.coherence.jpa.JpaCacheStore</class-name>
+							<init-params>
+
+								<!-- This param is the entity name -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param is the fully qualified entity class -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>com.leonardo.m000dly0.model.entity.tracks.ext.{cache-name}Eb</param-value>
+								</init-param>
+
+								<!-- This param should match the value of the -->
+								<!-- persistence unit name in persistence.xml -->
+								<init-param>
+									<param-type>java.lang.String</param-type>
+									<param-value>DiismJPA</param-value>
+								</init-param>
+
+							</init-params>
+						</class-scheme>
+					</cachestore-scheme>
+
+					<write-delay>5m</write-delay>
+					<write-batch-factor>0.75</write-batch-factor>
+
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+
+			<autostart>true</autostart>
+
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>lockScheme</scheme-name>
+			<service-name>lockScheme</service-name>
+			<serializer>
+				<instance>
+					<class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+					<init-params>
+						<init-param>
+							<param-type>String</param-type>
+							<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+							</param-value>
+						</init-param>
+					</init-params>
+				</instance>
+			</serializer>
+
+			<thread-count>10</thread-count>
+			<backing-map-scheme>
+				<read-write-backing-map-scheme>
+					<internal-cache-scheme>
+						<local-scheme>
+							<unit-calculator>BINARY</unit-calculator>
+						</local-scheme>
+					</internal-cache-scheme>
+				</read-write-backing-map-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>
+
+		<distributed-scheme>
+			<scheme-name>cacheStoreControlScheme</scheme-name>
+			<service-name>cacheStoreControlScheme</service-name>
+			<thread-count>2</thread-count>
+			<backing-map-scheme>
+				<local-scheme>
+					<unit-calculator>BINARY</unit-calculator>
+				</local-scheme>
+			</backing-map-scheme>
+			<autostart>true</autostart>
+		</distributed-scheme>		
+
+		<!-- LISTENER -->
+		<class-scheme>
+			<scheme-name>listener</scheme-name>
+			<class-name>spring-bean:sourceTrackListener</class-name>
+			<init-params>
+				<init-param>
+					<param-name>setBackingMapManagerContext</param-name>
+					<param-value>{manager-context}</param-value>
+				</init-param>
+			</init-params>
+		</class-scheme>
+
+		<class-scheme>
+			<scheme-name>listenerSystem</scheme-name>
+			<class-name>spring-bean:delegatingBackingMapListener</class-name>
+			<init-params>
+				<init-param>
+					<param-name>initDelegating</param-name>
+					<!-- Comma delimited list of fully classified name classes and/or spring object name -->
+					<param-value>systemTrackListener,interceptorListener</param-value>
+				</init-param>
+			</init-params>
+		</class-scheme>
+
+		<class-scheme>
+			<scheme-name>listenerVoyage</scheme-name>
+			<class-name>spring-bean:sourceVoyageListener</class-name>
+			<init-params>
+				<init-param>
+					<param-name>setBackingMapManagerContext</param-name>
+					<param-value>{manager-context}</param-value>
+				</init-param>
+			</init-params>
+		</class-scheme>
+
+		<class-scheme>
+			<scheme-name>listenerEmergency</scheme-name>
+			<class-name>spring-bean:emergencyListener</class-name>
+			<init-params>
+				<init-param>
+					<param-name>setBackingMapManagerContext</param-name>
+					<param-value>{manager-context}</param-value>
+				</init-param>
+			</init-params>
+		</class-scheme>
+
+		<class-scheme>
+			<scheme-name>listenerSystemEmergency</scheme-name>
+			<class-name>spring-bean:systemEmergencyListener</class-name>
+			<init-params>
+				<init-param>
+					<param-name>setBackingMapManagerContext</param-name>
+					<param-value>{manager-context}</param-value>
+				</init-param>
+			</init-params>
+		</class-scheme>
+
+		<!-- §§§§§§§§§§§§§§§§§§§§§§§§ Proxy Scheme §§§§§§§§§§§§§§§§§§§§§§§§§§§§§ 
+			Da abilitare solo nel nodo proxy dell'architettura. -->
+
+		<proxy-scheme>
+			<service-name>ExtendTcpProxyService</service-name>
+			<thread-count>5</thread-count>
+			<acceptor-config>
+				<tcp-acceptor>
+					<local-address>
+						<address>coh-srv1.core03.nereus</address>
+						<port>10888</port>
+					</local-address>
+				</tcp-acceptor>
+				<serializer>
+					<instance>
+						<class-name>com.tangosol.io.pof.ConfigurablePofContext
+						</class-name>
+						<init-params>
+							<init-param>
+								<param-type>string</param-type>
+								<param-value>/media/03-leonardo/nereus/core/common/coherence/backend-pof-config-auto.CH.xml
+								</param-value>
+							</init-param>
+						</init-params>
+					</instance>
+				</serializer>
+			</acceptor-config>
+			<autostart>true</autostart>
+		</proxy-scheme>
+
+	</caching-schemes>
+</cache-config>

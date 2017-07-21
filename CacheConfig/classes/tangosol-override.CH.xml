@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<coherence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/coherence/coherence-operational-config"
+	xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-operational-config coherence-operational-config.xsd">
+
+	<!-- 
+	======================================================================
+				CLUSTER CONFIGURATION
+	======================================================================				 
+	-->
+
+	<cluster-config>
+		<member-identity>
+			<cluster-name system-property="tangosol.coherence.cluster">Coherence-Cluster-1</cluster-name>
+
+			<role-name system-property="tangosol.coherence.role">Server</role-name>
+		</member-identity>
+
+		<multicast-listener>
+			<address system-property="tangosol.coherence.clusteraddress">231.1.1.13</address>
+
+			<port system-property="tangosol.coherence.clusterport">37013</port>
+
+			<time-to-live system-property="tangosol.coherence.ttl">2</time-to-live>
+
+			<join-timeout-milliseconds>2000</join-timeout-milliseconds>
+		</multicast-listener>
+
+		<service-guardian>
+			<service-failure-policy>logging</service-failure-policy>
+			<!-- 86400000 ms = 24h -->
+			<timeout-milliseconds system-property="tangosol.coherence.guard.timeout">86400000</timeout-milliseconds>
+		</service-guardian>
+
+	</cluster-config>
+
+	<!-- 
+	======================================================================
+				LOGGING CONFIGURATION
+	======================================================================
+	-->
+	<!--logging-config>
+		<destination system-property="tangosol.coherence.log">/media/04-nereus-logs/core/coherence.CH.log</destination>
+
+		<severity-level system-property="tangosol.coherence.log.level">9</severity-level>
+	</logging-config-->
+
+
+	<!-- 
+	======================================================================
+				Custom CACHE FACTORY CONFIGURATION
+	======================================================================
+	-->
+	<configurable-cache-factory-config>
+		<class-name system-property="tangosol.coherence.cachefactory">com.leonardo.m000dly0.cache.SpringAwareCacheFactory</class-name>
+
+		<init-params>
+			<init-param>
+				<param-type>java.lang.String</param-type>
+				<param-value system-property="tangosol.coherence.cacheconfig">coherence-cache-config.xml</param-value>
+			</init-param>
+
+			<init-param id="1">
+				<param-type>java.lang.String</param-type>
+				<param-value system-property="tangosol.coherence.springconfig">spring/dfs-correlation-main-spring.xml</param-value>
+			</init-param>
+		</init-params>
+	</configurable-cache-factory-config>
+
+
+	<!-- 
+	======================================================================
+				MANAGEMENT CONFIGURATION
+	======================================================================
+	-->
+	<management-config>
+		<managed-nodes system-property="tangosol.coherence.management">all</managed-nodes>
+		<allow-remote-management system-property="tangosol.coherence.management.remote">true</allow-remote-management>
+	</management-config>
+
+	<license-config>
+		<license-mode system-property="tangosol.coherence.mode">prod</license-mode>
+	</license-config>
+
+</coherence>
