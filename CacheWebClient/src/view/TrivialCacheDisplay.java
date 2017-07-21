@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.TrivialDataRecord;
+import model.TrivialRecord;
 
 public class TrivialCacheDisplay extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
@@ -27,7 +27,7 @@ public class TrivialCacheDisplay extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        List <TrivialDataRecord> teams= new model.TrivialCacheDump().getDataFromCache();
+        List <TrivialRecord> teams = (List<TrivialRecord>) new model.TrivialCacheDump().getDataFromCache();
         
         out.println("<html>");
         out.println("<head><title>Cache reader</title></head>");

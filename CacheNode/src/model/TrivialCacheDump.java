@@ -15,14 +15,14 @@ public class TrivialCacheDump {
     }
     
     
-    public List<TrivialDataRecord> getDataFromCache(){
+    public List<TrivialRecord> getDataFromCache(){
         
         
           NamedCache cache = CacheFactory.getCache("trivialCache");
           
-          List<TrivialDataRecord> records = new ArrayList<TrivialDataRecord>(20);
+          List<TrivialRecord> records = new ArrayList<TrivialRecord>(20);
 
-          Iterator<Map.Entry<String, TrivialDataRecord>> it;
+          Iterator<Map.Entry<String, TrivialRecord>> it;
           it = cache.entrySet().iterator();
 
           while(it.hasNext()){

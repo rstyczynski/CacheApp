@@ -22,4 +22,6 @@
     </resources>
     <outputDirectory>classes/</outputDirectory>
   </build>
+  <dependencies>
+  </dependencies>
 </project>

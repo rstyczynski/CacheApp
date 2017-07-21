@@ -8,15 +8,15 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
-public class TrivialDataRecord implements Serializable, PortableObject {
+public class TrivialRecord implements Serializable, PortableObject {
     
     private String cityName;
     
-    public TrivialDataRecord(){
+    public TrivialRecord(){
         super();
     }
 
-    public TrivialDataRecord(String cityName) {
+    public TrivialRecord(String cityName) {
         this.cityName = cityName;
         System.out.println(">>>>>Serializer initialized. Done.");
     }

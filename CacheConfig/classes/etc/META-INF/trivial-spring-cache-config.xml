@@ -25,8 +25,7 @@
                     <init-params>
                         <init-param>
                             <param-type>String</param-type>
-                           <!-- <param-value>META-INF/trivial-pof-config.xml</param-value> -->
-                            <param-value>trivial-pof-config.xml</param-value>
+                            <param-value>META-INF/trivial-pof-config.xml</param-value>
                         </init-param>
                     </init-params>
                 </instance>
@@ -47,20 +46,8 @@
         </distributed-scheme>
         <class-scheme>
             <scheme-name>springListener</scheme-name>
-            <!-- Replace 3.7 style with spring:bean
-      		<class-name>spring-bean:trivialListener</class-name>
-      		<init-params>
-        		<init-param>
-          			<param-name>setBackingMapManagerContext</param-name>
-          			<param-value>{manager-context}</param-value>
-        		</init-param>
-      		</init-params>
-      -->
             <spring:bean>
                 <spring:bean-name>trivialListener</spring:bean-name>
-                <!--
-                <spring:property name="backingMapManagerContext">{manager-context}</spring:property>
-                -->
             </spring:bean>
         </class-scheme>
     </caching-schemes>

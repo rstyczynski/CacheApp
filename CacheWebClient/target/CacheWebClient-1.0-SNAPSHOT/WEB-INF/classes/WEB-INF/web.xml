@@ -3,21 +3,21 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <servlet>
-        <servlet-name>GetAllFromCache</servlet-name>
-        <servlet-class>view.GetAllFromCache</servlet-class>
+        <servlet-name>CacheDisplay</servlet-name>
+        <servlet-class>view.TrivialCacheDisplay</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>WarmUpCache</servlet-name>
-        <servlet-class>view.WarmUpCache</servlet-class>
+        <servlet-name>CacheWarmer</servlet-name>
+        <servlet-class>view.TrivialCacheWarmer</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>GetAllFromCache</servlet-name>
-        <url-pattern>/GetAllFromCache</url-pattern>
+        <servlet-name>CacheDisplay</servlet-name>
+        <url-pattern>/CacheDisplay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>WarmUpCache</servlet-name>
-        <url-pattern>/WarmUpCache</url-pattern>
+        <servlet-name>CacheWarmer</servlet-name>
+        <url-pattern>/CacheWarmer</url-pattern>
     </servlet-mapping>
 </web-app>

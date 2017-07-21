@@ -1,4 +1,4 @@
-model/TrivialDataRecord.class
 model/TrivialCacheWarmer.class
+model/TrivialRecord.class
 model/TrivialCacheDump.class
 model/TrivialListener.class

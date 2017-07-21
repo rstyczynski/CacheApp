@@ -41,15 +41,22 @@
     </dependencies>
     <build>
         <sourceDirectory>src/</sourceDirectory>
-        <resources/>
+        <resources>
+            <resource>
+                <directory>public_html/</directory>
+            </resource>
+        </resources>
         <outputDirectory>classes/</outputDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webXml>public_html\WEB-INF\web.xml</webXml>
+                    <webXml>public_html/WEB-INF/web.xml</webXml>
+                    <packagingExcludes>WEB-INF/lib/CacheConfig*.jar</packagingExcludes>
                 </configuration>
+                
+          
             </plugin>
         </plugins>
     </build>

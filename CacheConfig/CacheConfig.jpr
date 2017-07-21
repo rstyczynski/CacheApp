@@ -56,6 +56,7 @@
    </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
+         <string v="CDI"/>
          <string v="Coherence"/>
          <string v="Java"/>
          <string v="Maven"/>
@@ -79,6 +80,12 @@
             <value n="javaOptions" v="-Dtangosol.coherence.cacheconfig=&quot;/Users/rstyczynski/Documents/SELEX/Leonardo072017/CacheApp/CacheConfig/src/META-INF/coherence-cache-config.xml&quot;"/>
             <value n="name" v="Default"/>
          </hash>
+      </hash>
+   </hash>
+   <hash n="oracle.toplink.workbench.addin">
+      <hash n="persistence-list">
+         <value n="jpa-version" v="2.0"/>
+         <value n="metamodel-generation-directory" v=""/>
       </hash>
    </hash>
 </jpr:project>
