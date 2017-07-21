@@ -139,10 +139,27 @@ rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip
 # Use
 
 http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheWarmer
+
+```
+Filling the cache.
+
+Done.
+```
+
 http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
 
-http://localhost:8001/CacheWebClient-1.0-SNAPSHOT/CacheWarmer
-http://localhost:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
+```
+1	Arsenal
+2	Hull City
+3	Everton
+4	Leicester City
+5	Liverpool
+6	Chelsea
+7	Aston Villa
+8	Burnley
+9	Crystal Palace
+```
+
 
 
 
