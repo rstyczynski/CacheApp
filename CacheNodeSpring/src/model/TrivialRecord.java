@@ -8,46 +8,47 @@ import java.io.IOException;
 import java.io.Serializable;
 
 
+@SuppressWarnings("oracle.jdeveloper.java.serialversionuid-field-missing")
 public class TrivialRecord implements Serializable, PortableObject {
     
-    private String cityName;
+    private String Liczba;
     
     public TrivialRecord(){
         super();
+        System.out.println(">>>>>TrivialRecord serializer initialized. Done.");
     }
 
     public TrivialRecord(String cityName) {
-        this.cityName = cityName;
-        System.out.println(">>>>>Serializer initialized. Done.");
+        this.Liczba = cityName;
+        System.out.println(">>>>>TrivialRecord serializer initialized. Done.");
     }
     
 
     public void setCityName(String cityName) {
-        this.cityName = cityName;
+        this.Liczba = cityName;
     }
 
     public String getCityName() {
-        return cityName;
+        return Liczba;
     }
 
     @Override
     public String toString() {
-        return cityName;
+        return Liczba;
     }
 
     @Override
     public void writeExternal(PofWriter pofWriter) throws IOException {
-        pofWriter.writeString(0, cityName);
+        pofWriter.writeString(0, Liczba);
         
-        System.out.println(">>>>>Record.writeExternal. Done.");
+        System.out.println(">>>>>TrivialRecord.writeExternal. Done.");
     }
     
     @Override
     public void readExternal(PofReader pofReader) throws IOException {
-        cityName = pofReader.readString(0);
-        //cityName = "WARSAW";
+        Liczba = pofReader.readString(0);
         
-        System.out.println(">>>>>Record.readExternal. Done.");
+        System.out.println(">>>>>TrivialRecord.readExternal. Done.");
     }
 
 
