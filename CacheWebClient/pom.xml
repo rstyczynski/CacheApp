@@ -18,7 +18,7 @@
         
         <dependency>
             <groupId>CacheApp</groupId>
-            <artifactId>CacheNode</artifactId>
+            <artifactId>CacheModel</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>

@@ -29,18 +29,17 @@
             <version>4.3.8.RELEASE</version>
         </dependency>
     </dependencies>
-    
     <build>
         <sourceDirectory>src/</sourceDirectory>
         <resources>
+            
             <resource>
                 <directory>etc/</directory>
             </resource>
         </resources>
         <outputDirectory>${project.build.directory}/classes/</outputDirectory>
         <plugins>
-        
-        <!--
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -96,4 +95,5 @@
             </plugin>
         </plugins>
     </build>
+    <packaging>jar</packaging>
 </project>

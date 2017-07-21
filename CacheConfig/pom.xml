@@ -8,14 +8,7 @@
   <build>
     <sourceDirectory>src/</sourceDirectory>
     <resources>
-      <resource>
-        <directory>${basedir}</directory>
-        <filtering>false</filtering>
-        <excludes>
-          <exclude>*</exclude>
-          <exclude>**</exclude>
-        </excludes>
-      </resource>
+
       <resource>
         <directory>etc/</directory>
       </resource>

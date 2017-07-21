@@ -5,6 +5,7 @@
     <artifactId>CacheNode</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>Cache storage node configuration</description>
+
     <dependencies>
         <dependency>
             <groupId>com.oracle.adf.library</groupId>
@@ -18,6 +19,7 @@
     <build>
         <sourceDirectory>src/</sourceDirectory>
         <resources>
+
             <resource>
                 <directory>etc/</directory>
             </resource>

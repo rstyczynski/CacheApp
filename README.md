@@ -10,14 +10,27 @@ cd $CacheAppBase
 
 cd CacheConfig
 mvn clean 
-mvn install
 mvn package 
+mvn install
 cd ..
+
+cd CacheModel
+mvn clean 
+mvn package 
+mvn install
+cd ..
+
 
 cd CacheNode
 mvn clean 
-mvn install
 mvn package 
+mvn install
+cd ..
+
+cd CacheNodeSpring
+mvn clean 
+mvn package 
+mvn install
 cd ..
 
 cd CacheWebClient
@@ -33,7 +46,9 @@ cd ..
 function showAll {
 ls ~/.m2/repository/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/coherence-spring-2.0.0-SNAPSHOT.jar 
 ls $CacheAppBase/CacheConfig/target/*.jar
+ls $CacheAppBase/CacheModel/target/*.jar
 ls $CacheAppBase/CacheNode/target/*.gar
+ls $CacheAppBase/CacheNodeSpring/target/*.gar
 ls $CacheAppBase/CacheWebClient/target/*.war
 }
 
@@ -66,17 +81,22 @@ rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip
 ```
 
 
-## 2. Add coherence-spring-2.0.0-SNAPSHOT.jarto WebLogic $DOMAIN/lib directory at Application and Cache servers
-## 3. Copy CacheConfig-1.0.0-SNAPSHOT.jar to WebLogic $DOMAIN/lib directory at Application and Cache servers
+## 2. Add to WebLogic $DOMAIN/lib directory at Application and Cache servers
+
+```
+coherence-spring-2.0.0-SNAPSHOT.jar
+CacheConfig-1.0.0-SNAPSHOT.jar 
+CacheModel-1.0.0-SNAPSHOT.jar 
+```
 
 
-## 4. Prepare arguments at Application servers
+## 3. Prepare arguments at Application servers
 
 ```bash
 -Dtangosol.coherence.cacheconfig=META-INF/trivial-cache-config.xml
 ```
 
-## 5. Restart aApplication and Cache servers
+## 4. Restart aApplication and Cache servers
 
 
 # Deploy your artifacts

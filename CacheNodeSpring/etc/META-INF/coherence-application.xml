@@ -3,10 +3,6 @@
                        xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-application http://xmlns.oracle.com/coherence/coherence-application/1.0/coherence-application.xsd"
                        xmlns="http://xmlns.oracle.com/coherence/coherence-application">
 
-<!--
-    <cache-configuration-ref>META-INF/trivial-cache-config.xml</cache-configuration-ref>
---> 
-
     <cache-configuration-ref>META-INF/trivial-spring-cache-config.xml</cache-configuration-ref>
 
 </coherence-application>
