@@ -138,6 +138,8 @@ rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip
 
 # Use
 
+## 1. Use browser to warm up cache
+
 http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheWarmer
 
 ```
@@ -146,6 +148,58 @@ Filling the cache.
 Done.
 ```
 
+
+### 1.1. Check Application server standard out 
+
+To verify that pof serializer class works
+
+```
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Serializer initialized. Done.
+>>>>>Record.writeExternal. Done.
+>>>>>Record.readExternal. Done.
+```
+
+### 1.2. Check Cache server standard out 
+
+To verify that listener class works
+
+```
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DC0A497C40E154E0131), old value=Binary(length=15, value=0x15A90F00004E07417273656E616C40), new value=Binary(length=15, value=0x15A90F00004E07417273656E616C40)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D859DA2AB02154E0132), old value=Binary(length=19, value=0x15A90F00004E0B4173746F6E2056696C6C6140), new value=Binary(length=19, value=0x15A90F00004E0B4173746F6E2056696C6C6140)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D93DF9BDB0C154E0133), old value=Binary(length=15, value=0x15A90F00004E074275726E6C657940), new value=Binary(length=15, value=0x15A90F00004E074275726E6C657940)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=9, value=0x0DCFF6C042154E0134), old value=Binary(length=15, value=0x15A90F00004E074368656C73656140), new value=Binary(length=15, value=0x15A90F00004E074368656C73656140)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DD9B4F9B20E154E0135), old value=Binary(length=22, value=0x15A90F00004E0E4372797374616C2050616C61636540), new value=Binary(length=22, value=0x15A90F00004E0E4372797374616C2050616C61636540)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D9C8DCCDD02154E0136), old value=Binary(length=15, value=0x15A90F00004E0745766572746F6E40), new value=Binary(length=15, value=0x15A90F00004E0745766572746F6E40)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D8ACFF5AD0C154E0137), old value=Binary(length=17, value=0x15A90F00004E0948756C6C204369747940), new value=Binary(length=17, value=0x15A90F00004E0948756C6C204369747940)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DE4C6F2D901154E0138), old value=Binary(length=22, value=0x15A90F00004E0E4C6569636573746572204369747940), new value=Binary(length=22, value=0x15A90F00004E0E4C6569636573746572204369747940)}
+>>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DF284CBA90F154E0139), old value=Binary(length=17, value=0x15A90F00004E094C69766572706F6F6C40), new value=Binary(length=17, value=0x15A90F00004E094C69766572706F6F6C40)}
+```
+
+## 2. Use browser to read cache
 http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
 
 ```
@@ -160,6 +214,20 @@ http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
 9	Crystal Palace
 ```
 
+
+### 2.1. Check Application server standard out 
+
+```
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+>>>>>Record.readExternal. Done.
+```
 
 
 
