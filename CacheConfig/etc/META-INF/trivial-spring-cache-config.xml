@@ -34,7 +34,11 @@
                 <local-scheme>
                     <listener>
                         <class-scheme>
-                            <!-- <scheme-ref>springListener</scheme-ref> -->
+                            <!-- 
+                            <scheme-ref>springListener</scheme-ref> 
+                            Does not work with Spring integration. 
+                            Use Spring direcrly instead.
+                            -->
                             <spring:bean>
                                 <spring:bean-name>trivialListener</spring:bean-name>
                             </spring:bean>
