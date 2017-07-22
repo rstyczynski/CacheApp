@@ -71,8 +71,7 @@ showAll
 
 # Prepare servers
 
-Some preparations need to be done at servers. Apart from prepareation of Coherence elements XXX
-
+Some preparations need to be done at servers. Apart from prepareation of Coherence elements, it's manatory to put requirted jars in domain lib directory.
 
 ## 1. Configure Weblogic
 
@@ -309,7 +308,6 @@ Siedem
 >>>>>Record.readExternal. Done.
 >>>>>Record.readExternal. Done.
 ```
-
 
 
 # Known limitations
