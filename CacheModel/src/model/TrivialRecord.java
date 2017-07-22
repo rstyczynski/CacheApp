@@ -10,42 +10,41 @@ import java.io.Serializable;
 
 public class TrivialRecord implements Serializable, PortableObject {
     
-    private String cityName;
+    private String value;
     
     public TrivialRecord(){
         super();
     }
 
-    public TrivialRecord(String cityName) {
-        this.cityName = cityName;
+    public TrivialRecord(String _value) {
+        this.value = _value;
         System.out.println(">>>>>Serializer initialized. Done.");
     }
     
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setValue(String _value) {
+        this.value = _value;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return cityName;
+        return value;
     }
 
     @Override
     public void writeExternal(PofWriter pofWriter) throws IOException {
-        pofWriter.writeString(0, cityName);
+        pofWriter.writeString(0, value);
         
         System.out.println(">>>>>Record.writeExternal. Done.");
     }
     
     @Override
     public void readExternal(PofReader pofReader) throws IOException {
-        cityName = pofReader.readString(0);
-        //cityName = "WARSAW";
+        value = pofReader.readString(0);
         
         System.out.println(">>>>>Record.readExternal. Done.");
     }
