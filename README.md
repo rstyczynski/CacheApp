@@ -2,23 +2,23 @@
 
 Exemplary Coherence Cache App for WebLogic 12.2.1 with Coherence Spring integration.
 
-This code demonstrates use of Coherence GAR by Web client both running on multiple nodes of WebLogic 12.2.1 together with Coherence spring integration. Spring integration is a new approach shipped with Coherence 12c, and replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behaviour and unexpected side effects. 
+This code demonstrates use of Coherence GAR by Web client both running on multiple nodes of WebLogic 12.2.1 together with Coherence spring integration. Spring integration is a new approach shipped with Coherence 12c, and replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behavior and unexpected side effects. 
 
-New spring integrarion model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syngtax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/
+New spring integration model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syntax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/
 
 
 # Exemplary application
 
-Exemplary appication is build with use of minimal lines of code, however consist of sevar modules, simulating real life enterprise class application. 
+Exemplary application is build with use of minimal lines of code, however consist of several modules, simulating real life enterprise class application. 
 
-The application consisft of:
-1. configurartion files
+The application consist of:
+1. configuration files
 2. data model
-3. cache service w/o Spring integrarion
-4. cache service with Spring integrarion
+3. cache service w/o Spring integration
+4. cache service with Spring integration
 5. web client
 
-Each of them is a separated module. In this example, each module is build as a separated physical set of files controlled by Maven. Note that cahce service is prepared in two modes: with Spring integrartion, and without. 
+Each of them is a separated module. In this example, each module is build as a separated physical set of files controlled by Maven. Note that cache service is prepared in two modes: with Spring integration, and without. 
 
 # Build exemplary application
 
@@ -51,9 +51,9 @@ cd ..
 
 ```
 
-## Know your artifacts
+## Know your artefacts
 
-Build of artifacts generates jar/gar/war modules located in module's target directory. Use below bash script to see location of generated modules.
+Build of artefacts generates jar/gar/war modules located in module's target directory. Use below bash script to see location of generated modules.
 
 
 ```bash
@@ -71,13 +71,13 @@ showAll
 
 # Prepare servers
 
-Some preparations need to be done at servers. Apart from prepareation of Coherence elements, it's manatory to put requirted jars in domain lib directory.
+Some preparations need to be done at servers. Apart from preparation of Coherence elements, it's mandatory to put required jars in domain lib directory.
 
 ## 1. Configure Weblogic
 
-WebLogic have to be prepared for deployment by definition of appliction, and data tiers, and Coherence cluster. Description of this area is aout of scope of this description. Please refer to Oracle documentation: https://docs.oracle.com/middleware/1221/wls/CLUST/coherence.htm#CLUST629
+WebLogic have to be prepared for deployment by definition of application, and data tiers, and Coherence cluster. Description of this area is about of scope of this description. Please refer to Oracle documentation: https://docs.oracle.com/middleware/1221/wls/CLUST/coherence.htm#CLUST629
 
-Target system should consiste of:
+Target system should consist of:
 1. Storage disabled application server(s)
 2. Storage enabled storage server(s)
 3. Coherence cluster
@@ -120,7 +120,7 @@ CacheModel-1.0.0-SNAPSHOT.jar
 
 ## 3. Prepare arguments at Application servers
 
-In opposite to cache storge nodes, which are configiured by GAR archives, applictation nodes have to be informed about cache layout. It's achived by using regular JVM argument 'tangosol.coherence.cacheconfig' pointing to cache config file located in $DOMAN/lib/CacheConfig-1.0.0-SNAPSHOT.jar Cache config is a system wide configuration thus this setup sounds reasonable. Using this technique you may specify special cache config file for proxy nodes.
+In opposite to cache storage nodes, which are configured by GAR archives, application nodes have to be informed about cache layout. It's achieved by using regular JVM argument 'tangosol.coherence.cacheconfig' pointing to cache config file located in $DOMAN/lib/CacheConfig-1.0.0-SNAPSHOT.jar Cache config is a system wide configuration thus this setup sounds reasonable. Using this technique you may specify special cache config file for proxy nodes.
 
 
 ```bash
@@ -132,14 +132,14 @@ In opposite to cache storge nodes, which are configiured by GAR archives, applic
 To register $DOMAIN/lib packages and JVM arguments, restart application and storage nodes. 
 
 
-# Deploy your artifacts
+# Deploy your artefacts
 
 ## 1. Deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar 
 
 Use WebLogic tools or console to deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar on Cache servers
 
 
-After deplyment you should see lines similar to presented below in server's log.
+After deployment you should see lines similar to presented below in server's log.
 
 ```
 ####<Jul 21, 2017, 1:03:27,987 PM UTC> <Info> <J2EE> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '6' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001b> <1500642207987> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-160151> <Registered library Extension-Name: CacheNodeSpring-1 (JAR).> 
@@ -156,10 +156,10 @@ After deplyment you should see lines similar to presented below in server's log.
 ## 2. Deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers
 
 
-Use WebLiogic console to deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers.
+Use WebLogic console to deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers.
 
 
-After deplyment you should see lines similar to presented below in server's log.
+After deployment you should see lines similar to presented below in server's log.
 
 ```
 ####<Jul 21, 2017, 1:09:02,877 PM UTC> <Info> <CONCURRENCY> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542877> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162601> <Creating ContextService "DefaultContextService" (partition="DOMAIN", module="null", application="CacheWebClient-1.0-SNAPSHOT")> 
@@ -172,12 +172,12 @@ After deplyment you should see lines similar to presented below in server's log.
 
 # Start & verify
 
-Start of GAR service results in spawning number of Coherence threads. Note that each set ot threads is separated from another GAR by (a) classloader and (b) prefix added to thread name. It physically separates service from other applicstions running in WebLogic server. 
+Start of GAR service results in spawning number of Coherence threads. Note that each set of threads is separated from another GAR by (a) class loader and (b) prefix added to thread name. It physically separates service from other applications running in WebLogic server. 
 
 
 ## 1. Start CacheNodeSpring-1.0.0-SNAPSHOT application in WebLogic console
 
-Use WebLogic console to start CacheNodeSpring-1.0.0-SNAPSHOT application. It will start Coherence service threads. Note that Soherence threads will have in its name :trivial-scope: what is a service communication scope defined in cache config files.
+Use WebLogic console to start CacheNodeSpring-1.0.0-SNAPSHOT application. It will start Coherence service threads. Note that Coherence threads will have in its name :trivial-scope: what is a service communication scope defined in cache config files.
 
 
 After start you should see lines similar to presented below in server's log.
@@ -312,35 +312,35 @@ Siedem
 
 # Known limitations
 
-## Classloader does not load resources from root
+## Class loader does not load resources from root
 
-Classloader in WebLogic 12.2.1 does not load resources from root of the class path. 
+Class loader in WebLogic 12.2.1 does not load resources from root of the class path. 
 
 Known workaround: move your resources to META-INF and prefix all resource load with META-INF e.g. classpath:META-INF/trivial.properties.
 
-## Classloader does not load classes from /lib directory in GAR
+## Class loader does not load classes from /lib directory in GAR
 
-WebLogic Classloader does not load classes from jar archives located in /lib directory in GAR package. It brakes documented contract: https://docs.oracle.com/middleware/1221/wls/WLCOH/create-application.htm#WLCOH719
+WebLogic Class loader does not load classes from jar archives located in /lib directory in GAR package. It brakes documented contract: https://docs.oracle.com/middleware/1221/wls/WLCOH/create-application.htm#WLCOH719
 
-Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatucally adds to classpatch all jars located in $DOMAIN/lib dorectory.
+Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatically adds to classpath all jars located in $DOMAIN/lib directory.
 
 
-## Classloader does not load classes from / directory in GAR
+## Class loader does not load classes from / directory in GAR
 
 WebLogic Classloader does not load classes from classes located in / directory of GAR package. It brakes documented contract: https://docs.oracle.com/middleware/1221/wls/WLCOH/create-application.htm#WLCOH719
 
-Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatucally adds to classpatch all jars located in $DOMAIN/lib dorectory.
+Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatically adds to classpath all jars located in $DOMAIN/lib directory.
 
 
-## Classloader does not refresh classes from undeployed applications
+## Class loader does not refresh classes from undeployed applications
 
-Redeploy of application or undeply and eploy in teh same seccion deos not refresh classes. Application will be efectively no redeployed. 
+Redeploy of application or undeploy and deploy in the same session does not refresh classes. Application will be effectively no redeployed. 
 
 Known workaround: after undeploy Activate Changes in WebLogic Change Center. This step will remove classes from JVM. 
 
 ## Maven GAR support does not work
 
-Maven plugins presented in product documentation does not work. It breakes documented contract: https://docs.oracle.com/middleware/1221/core/MAVEN/coherence_project.htm#MAVEN8912
+Maven plugins presented in product documentation does not work. It breaks documented contract: https://docs.oracle.com/middleware/1221/core/MAVEN/coherence_project.htm#MAVEN8912
 
 
 ```bash
@@ -388,7 +388,7 @@ rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip
 
 ## Coherence spring integration does not support schema-ref
 
-XML Scheme reference known from Coherence config does not work in 12.2.1 with spring inteegration.  
+XML Scheme reference known from Coherence config does not work in 12.2.1 with spring integration.  
 
 ```
             <backing-map-scheme>
@@ -408,7 +408,7 @@ XML Scheme reference known from Coherence config does not work in 12.2.1 with sp
         </class-scheme>
 ```
 
-Known workaround: Instead of refering to class-scheme refer directly to Spring bean definition. 
+Known workaround: Instead of referring to class-scheme refer directly to Spring bean definition. 
 
 ```
             <backing-map-scheme>
