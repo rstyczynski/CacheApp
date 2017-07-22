@@ -30,22 +30,24 @@ Client configuration is started with META-INF/trivial-cache-config.xml set by JV
 
 ### Library layout
 
-GAR and WAR modules takes classes and resources from 
+GAR and WAR modules takes classes and resources from DOMAIN/lib directory and own package. Note that due to errors classes are not loaded from GAR so all the classes have to be stored in DOMAIN/lib or at SYSTEM level.
 
 ```
  \
  |--GAR
- |    \-DOMAIN
+ |    \-DOMAIN/lib
  |       |---configuration.jar
  |       |---model.jar 
+ |       |---coherence-spring.jar
  |       |
  |       \-SYSTEM
  \--WAR
       |-servlets.jar
       |
-      \-DOMAIN
-         |---configuration
-         |---model
+      \-DOMAIN/lib
+         |---configuration.jar
+         |---model.jar
+         |---coherence-spring.jar
          |
          \-SYSTEM
 ```
