@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>CacheApp</groupId>
-    <artifactId>CacheNodeSpring</artifactId>
-    <version>1.2-SNAPSHOT</version>
-    <description>Cache storage node configuration with Spring integration</description>
-    <dependencies>
-        <dependency>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheConfig</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheModel</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        
-        <!--
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>CacheApp</groupId>
+  <artifactId>CacheNodeSpring</artifactId>
+  <version>1.2-SNAPSHOT</version>
+  <description>Cache storage node configuration with Spring integration</description>
+  <dependencies>
+    <dependency>
+      <groupId>CacheApp</groupId>
+      <artifactId>CacheConfig</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>CacheApp</groupId>
+      <artifactId>CacheModel</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <!--
         <dependency>
             <groupId>com.oracle.adf.library</groupId>
             <artifactId>Coherence-Runtime</artifactId>
@@ -26,47 +25,45 @@
             <scope>provided</scope>
         </dependency>
         -->
-        <!-- required by Spring integration -->
-        <!--
-        <dependency>
-            <groupId>com.oracle.coherence.spring</groupId>
-            <artifactId>coherence-spring</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
-        </dependency>
-
-        
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.3.8.RELEASE</version>
-        </dependency>
-        <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-beans</artifactId>
-            <version>4.3.8.RELEASE</version>
-</dependency>
-        -->
-        <!-- required by Spring integration -->
-    </dependencies>
-    
-    
-    <build>
-        <sourceDirectory>src/</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>etc/</directory>
-            </resource>
-        </resources>
-        <outputDirectory>${project.build.directory}/classes/</outputDirectory>
-        <plugins>
-        
-        
-            <!-- unpacked classes are not found by WLS class loader
+    <!-- required by Spring integration -->
+    <dependency>
+      <groupId>com.oracle.coherence.spring</groupId>
+      <artifactId>coherence-spring</artifactId>
+      <version>2.0.0-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>4.3.8.RELEASE</version>
+      <type>pom</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+    <!-- required by Spring integration -->
+  </dependencies>
+  <build>
+    <sourceDirectory>src/</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>etc/</directory>
+      </resource>
+    </resources>
+    <outputDirectory>${project.build.directory}/classes/</outputDirectory>
+    <plugins>
+      <!-- unpacked classes are not found by WLS class loader
                <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -117,8 +114,7 @@
                 </executions>
             </plugin>
             -->
-            
-            <!-- Libraries in /lib are not located by WLS classoader
+      <!-- Libraries in /lib are not located by WLS classoader
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -138,32 +134,28 @@
                 </executions>
             </plugin>
             -->
-            
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>rename-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>rename</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-                            <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-        <!--
+      <plugin>
+        <groupId>com.coderplus.maven.plugins</groupId>
+        <artifactId>copy-rename-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>rename-file</id>
+            <phase>package</phase>
+            <goals>
+              <goal>rename</goal>
+            </goals>
+            <configuration>
+              <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
+              <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <!--
         
 <plugins>
-
-
-
 
         <dependency>
             <groupId>CacheApp</groupId>
@@ -177,7 +169,7 @@
         </dependency>
         
         -->
-        <!-- does not work in GAR. GAR ignores MANIFEST.MF/Class-Path: !!!
+    <!-- does not work in GAR. GAR ignores MANIFEST.MF/Class-Path: !!!
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -216,10 +208,9 @@
                 </configuration>
             </plugin>
 
-            
-
+          
         </plugins>
             -->
-    </build>
-    <packaging>jar</packaging>
+  </build>
+  <packaging>jar</packaging>
 </project>

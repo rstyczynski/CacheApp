@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>CacheApp</groupId>
-    <artifactId>CacheNode</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>Cache storage node configuration</description>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.oracle.adf.library</groupId>
-            <artifactId>Coherence-Runtime</artifactId>
-            <version>12.2.1-0-0</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-    
-    <build>
-        <sourceDirectory>src/</sourceDirectory>
-        <resources>
-
-            <resource>
-                <directory>etc/</directory>
-            </resource>
-        </resources>
-        <outputDirectory>${project.build.directory}/classes/</outputDirectory>
-        <plugins>
-        
-        <!--
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>CacheApp</groupId>
+  <artifactId>CacheNode</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <description>Cache storage node configuration</description>
+  <build>
+    <sourceDirectory>src/</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>etc/</directory>
+      </resource>
+    </resources>
+    <outputDirectory>${project.build.directory}/classes/</outputDirectory>
+    <plugins>
+      <!-- Libraries in /lib are not located by WLS classoader
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -63,24 +50,24 @@
                 </configuration>
             </plugin>
             -->
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>rename-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>rename</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-                            <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+      <plugin>
+        <groupId>com.coderplus.maven.plugins</groupId>
+        <artifactId>copy-rename-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <id>rename-file</id>
+            <phase>package</phase>
+            <goals>
+              <goal>rename</goal>
+            </goals>
+            <configuration>
+              <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
+              <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
