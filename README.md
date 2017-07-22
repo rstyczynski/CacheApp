@@ -20,6 +20,15 @@ The application consist of:
 
 Each of them is a separated module. In this example, each module is build as a separated physical set of files controlled by Maven. Note that cache service is prepared in two modes: with Spring integration, and without. 
 
+### Configuration
+
+Application configuration is based on two ways: (a) cache, and (b) client
+
+Cache configuration starts in GAR/META-INF/coherence-application.xml which points to CONFIG/META-INF/trivial-spring-cache-config.xml, which initializes Spring context as described in META-INF/trivial-application-context.xml.
+
+Client configuration is started with META-INF/trivial-cache-config.xml set by JVM argument tangosol.coherence.cacheconfig
+
+
 # Build exemplary application
 
 To build application you need maven, git, java 8, and access to internet to download required java libraries. 
