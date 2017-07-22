@@ -2,7 +2,7 @@
 
 Exemplary Coherence Cache App for WebLogic 12.2.1 with Coherence Spring integration.
 
-This code demonstrates use of Coherence GAR by Web client both running on multiple nodes of WebLogic 12.2.1 together with Coherence spring integration. Spring integration is a new approach shipped with Coherence 12c, and replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behavior and unexpected side effects. 
+This code demonstrates use of Coherence GAR by Web client running on multiple nodes of WebLogic 12.2.1 together with Coherence Spring integration. Spring integration is a new approach shipped with Coherence 12c, which replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behavior and unexpected side effects, sometimes called bugs.
 
 New spring integration model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syntax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/
 
