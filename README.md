@@ -46,11 +46,11 @@ mvn clean package install
 cd ..
 
 
-cd CacheNodeSpring
+cd CacheNode
 mvn clean package
 cd ..
 
-cd CacheNodeSpringSpring
+cd CacheNodeSpring
 mvn clean package
 cd ..
 
@@ -417,7 +417,7 @@ XML Scheme reference known from Coherence config does not work in 12.2.1 with sp
         </class-scheme>
 ```
 
-Known workaround: Instead of referring to class-scheme refer directly to Spring bean definition. 
+Known workaround: instead of referring to class-scheme refer directly to Spring bean definition. 
 
 ```
             <backing-map-scheme>
