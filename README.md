@@ -32,6 +32,7 @@ Client configuration is started with META-INF/trivial-cache-config.xml set by JV
 
 GAR and WAR modules takes classes and resources from 
 
+```
  \
  |--GAR
  |    \-DOMAIN
@@ -47,6 +48,7 @@ GAR and WAR modules takes classes and resources from
          |---model
          |
          \-SYSTEM
+```
 
 # Build exemplary application
 
