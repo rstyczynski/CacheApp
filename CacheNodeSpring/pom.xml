@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>CacheApp</groupId>
     <artifactId>CacheNodeSpring</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <description>Cache storage node configuration with Spring integration</description>
     <dependencies>
         <dependency>
@@ -16,6 +16,8 @@
             <artifactId>CacheModel</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        
+        <!--
         <dependency>
             <groupId>com.oracle.adf.library</groupId>
             <artifactId>Coherence-Runtime</artifactId>
@@ -23,6 +25,9 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
+        -->
+        
+        <!-- required by Spring integration -->
         <dependency>
             <groupId>com.oracle.coherence.spring</groupId>
             <artifactId>coherence-spring</artifactId>
@@ -38,7 +43,16 @@
             <artifactId>spring-core</artifactId>
             <version>4.3.8.RELEASE</version>
         </dependency>
+        <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+            <version>4.3.8.RELEASE</version>
+</dependency>
+        <!-- required by Spring integration -->
+        
     </dependencies>
+    
+    
     <build>
         <sourceDirectory>src/</sourceDirectory>
         <resources>
@@ -47,7 +61,11 @@
             </resource>
         </resources>
         <outputDirectory>${project.build.directory}/classes/</outputDirectory>
-        <plugins>
+        
+        
+
+        
+<plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -59,14 +77,18 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
+                        
                             <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
+                            
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -100,6 +122,8 @@
                 </executions>
             </plugin>
         </plugins>
+
     </build>
+    
     <packaging>jar</packaging>
 </project>
