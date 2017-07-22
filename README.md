@@ -91,11 +91,11 @@ Build of artefacts generates jar/gar/war modules located in module's target dire
 ```bash
 function showAll {
 ls ~/.m2/repository/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/coherence-spring-2.0.0-SNAPSHOT.jar 
-ls $CacheAppBase/CacheConfig/target/*.jar
-ls $CacheAppBase/CacheModel/target/*.jar
-ls $CacheAppBase/CacheNodeSpring/target/*.gar
-ls $CacheAppBase/CacheNodeSpringSpring/target/*.gar
-ls $CacheAppBase/CacheWebClient/target/*.war
+ls CacheConfig/target/*.jar
+ls CacheModel/target/*.jar
+ls CacheNode/target/*.gar
+ls CacheNodeSpring/target/*.gar
+ls CacheWebClient/target/*.war
 }
 
 showAll
