@@ -28,6 +28,25 @@ Cache configuration starts in GAR/META-INF/coherence-application.xml which point
 
 Client configuration is started with META-INF/trivial-cache-config.xml set by JVM argument tangosol.coherence.cacheconfig
 
+### Library layout
+
+GAR and WAR modules takes classes and resources from 
+
+ \
+ |--GAR
+ |    \-DOMAIN
+ |       |---configuration.jar
+ |       |---model.jar 
+ |       |
+ |       \-SYSTEM
+ \--WAR
+      |-servlets.jar
+      |
+      \-DOMAIN
+         |---configuration
+         |---model
+         |
+         \-SYSTEM
 
 # Build exemplary application
 
