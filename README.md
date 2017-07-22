@@ -103,7 +103,7 @@ showAll
 
 # Prepare servers
 
-Some preparations need to be done at servers. Apart from preparation of Coherence elements, it's mandatory to put required jars in domain lib directory.
+Some preparations need to be done at servers. Apart from preparation of Coherence elements, it's mandatory to put required jars in domain's lib directory.
 
 ## 1. Configure Weblogic
 
