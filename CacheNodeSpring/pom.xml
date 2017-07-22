@@ -26,13 +26,15 @@
             <scope>provided</scope>
         </dependency>
         -->
-        
         <!-- required by Spring integration -->
+        <!--
         <dependency>
             <groupId>com.oracle.coherence.spring</groupId>
             <artifactId>coherence-spring</artifactId>
             <version>2.0.0-SNAPSHOT</version>
         </dependency>
+
+        
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -48,8 +50,8 @@
     <artifactId>spring-beans</artifactId>
             <version>4.3.8.RELEASE</version>
 </dependency>
+        -->
         <!-- required by Spring integration -->
-        
     </dependencies>
     
     
@@ -61,11 +63,121 @@
             </resource>
         </resources>
         <outputDirectory>${project.build.directory}/classes/</outputDirectory>
+        <plugins>
         
         
-
+            <!-- unpacked classes are not found by WLS class loader
+               <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                        <artifactItems>
+                 <artifactItem>
+            <groupId>CacheApp</groupId>
+            <artifactId>CacheConfig</artifactId>
+            <version>1.0-SNAPSHOT</version>
+                   <type>jar</type>
+                   <overWrite>false</overWrite>
+                   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                   <destFileName>optional-new-name.jar</destFileName>
+                   <includes>**/*.class,**/*.xml</includes>
+                   <excludes>**/*test.class</excludes>
+                 </artifactItem>
+                 
+                                  <artifactItem>
+            <groupId>CacheApp</groupId>
+            <artifactId>CacheModel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+                   <type>jar</type>
+                   <overWrite>false</overWrite>
+                   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                   <destFileName>optional-new-name.jar</destFileName>
+                   <includes>**/*.class,**/*.xml</includes>
+                   <excludes>**/*test.class</excludes>
+                 </artifactItem>
+                 
+               </artifactItems>
+               
+                                   <includes>**/*.*</includes>
+               
+               <outputDirectory>${project.build.directory}/classes</outputDirectory>
+               <overWriteReleases>false</overWriteReleases>
+               <overWriteSnapshots>true</overWriteSnapshots>
+               
+                           
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            
+            <!-- Libraries in /lib are not located by WLS classoader
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
+            
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
+                            <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <!--
         
 <plugins>
+
+
+
+
+        <dependency>
+            <groupId>CacheApp</groupId>
+            <artifactId>CacheConfig</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>CacheApp</groupId>
+            <artifactId>CacheModel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        
+        -->
+        <!-- does not work in GAR. GAR ignores MANIFEST.MF/Class-Path: !!!
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -103,27 +215,11 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>rename-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>rename</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-                            <destinationFile>${project.build.directory}/${project.build.finalName}.gar</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
 
+            
+
+        </plugins>
+            -->
     </build>
-    
     <packaging>jar</packaging>
 </project>
