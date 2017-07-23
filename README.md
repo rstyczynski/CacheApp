@@ -159,7 +159,7 @@ In opposite to cache storage nodes, which are configured by GAR archives, applic
 -Dtangosol.coherence.cacheconfig=META-INF/trivial-cache-config.xml
 ```
 
-## 4. Restart aApplication and Cache servers
+## 4. Restart Application and Cache servers
 
 To register $DOMAIN/lib packages and JVM arguments, restart application and storage nodes. 
 
@@ -168,7 +168,7 @@ To register $DOMAIN/lib packages and JVM arguments, restart application and stor
 
 ## 1. Deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar 
 
-Use WebLogic tools or console to deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar on Cache servers
+Use WebLogic tools or console to deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar on storage enabled cache servers
 
 
 After deployment you should see lines similar to presented below in server's log.
@@ -188,7 +188,7 @@ After deployment you should see lines similar to presented below in server's log
 ## 2. Deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers
 
 
-Use WebLogic console to deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers.
+Use WebLogic console to deploy CacheWebClient-1.0.0-SNAPSHOT on storage disabled Application servers.
 
 
 After deployment you should see lines similar to presented below in server's log.
