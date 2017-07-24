@@ -366,6 +366,18 @@ WebLogic Classloader does not load classes from classes located in / directory o
 
 Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatically adds to classpath all jars located in $DOMAIN/lib directory.
 
+## Class loader does not update classpath with definition provided in MANIFEST.MF
+
+According to Java specification Class-path: line in MANIFEST.MF should update classpath. It's not working with GAR.
+
+```
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: rstyczynski
+Build-Jdk: 1.8.0_121
+Class-Path: lib/model.jar
+```
 
 ## Class loader does not refresh classes from undeployed applications
 
