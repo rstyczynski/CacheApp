@@ -233,6 +233,13 @@ After start you should see lines similar to presented below in server's log.
 ####<Jul 21, 2017, 1:05:02,412 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001d> <1500642302412> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT successfully transitioned from STATE_ADMIN to STATE_ACTIVE on server CacheServer-4.> 
 ```
 
+You will notice initialization of Spring Beans in std out file. 
+
+```
+>>>>>TrivialListener. Initialized by Spring.
+>>>>>TrivialInit. Initialized by Spring.
+```
+
 ## 2. Start CacheWebClient-1.0.0-SNAPSHOT 
 
 Use WebLogic console to start CacheWebClient-1.0.0-SNAPSHOT application. 
