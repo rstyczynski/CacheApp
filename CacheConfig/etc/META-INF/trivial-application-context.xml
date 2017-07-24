@@ -10,8 +10,8 @@
       http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-      <bean id="trivialListener" class="logic.TrivialListener" lazy-init="false" ini-method="init"/>
+      <bean id="trivialListener" class="logic.TrivialListener" lazy-init="false" init-method="init"/>
       
-      <bean id="trivialInit" class="logic.TrivialInit" lazy-init="false" ini-method="init"/>
+      <bean id="trivialInit" class="logic.TrivialInit" lazy-init="false" init-method="init"/>
       
 </beans>
