@@ -3,8 +3,6 @@ package logic;
 import com.tangosol.util.MapEvent;
 import com.tangosol.util.MapListener;
 
-import javax.annotation.PostConstruct;
-
 
 public class TrivialListener implements MapListener {
 
@@ -23,14 +21,4 @@ public class TrivialListener implements MapListener {
         System.out.println(">>>>>TrivialListener. Update:" + mapEvent);
     }
 
-
-    @PostConstruct
-    public void postConstruct() {
-       System.out.println(">>>>>TrivialListener. Initialized by postConstruct.");
-    }
-    
-    public void init() {
-       System.out.println(">>>>>TrivialListener. Initialized by Spring.");
-    }
-    
 }
