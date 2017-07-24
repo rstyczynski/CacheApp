@@ -159,6 +159,9 @@ In opposite to cache storage nodes, which are configured by GAR archives, applic
 -Dtangosol.coherence.cacheconfig=META-INF/trivial-cache-config.xml
 ```
 
+Note that cluster configuration is moved to WebLogic. There is no tangosol-override.xml file anymore. 
+
+
 ## 4. Restart Application and Cache servers
 
 To register $DOMAIN/lib packages and JVM arguments, restart application and storage nodes. 
@@ -455,4 +458,3 @@ Known workaround: instead of referring to class-scheme refer directly to Spring 
                 </local-scheme>
             </backing-map-scheme>
 ```
-
