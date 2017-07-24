@@ -21,4 +21,8 @@ public class TrivialListener implements MapListener {
         System.out.println(">>>>>TrivialListener. Update:" + mapEvent);
     }
 
+    public void init() {
+       System.out.println(">>>>>TrivialListener. Initialized by Spring.");
+    }
+    
 }
