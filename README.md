@@ -157,7 +157,7 @@ rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip
 ### Add to WebLogic $DOMAIN/lib directory at Application and Cache servers
 
 ```
-coherence-spring-2.0.0-SNAPSHOT.jar
+coherence-spring-integration-2.0.0-SNAPSHOT.jar
 CacheConfig-1.0.0-SNAPSHOT.jar 
 CacheModel-1.0.0-SNAPSHOT.jar 
 ```
