@@ -71,7 +71,7 @@ mvn install:install-file  \
       -DgeneratePom=true
 ```
 
-You need to build or download Coherence Spring Integration. I'll proposoe to download on of recent snapshots.
+You need to build or download Coherence Spring Integration. I'll propose to download one of recent snapshots.
 
 ```
 COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
@@ -120,7 +120,7 @@ Some preparations need to be done at servers. Apart from preparation of Coherenc
 
 ## 1. Configure Weblogic
 
-WebLogic have to be prepared for deployment by definition of application, and data tiers, and Coherence cluster. Description of this area is about of scope of this description. Please refer to Oracle documentation: https://docs.oracle.com/middleware/1221/wls/CLUST/coherence.htm#CLUST629
+WebLogic has to be prepared for deployment of application, data tiers and Coherence cluster.  Instructions for that are out of scope of this description. Please refer to Oracle documentation: https://docs.oracle.com/middleware/1221/wls/CLUST/coherence.htm#CLUST629
 
 Target system should consist of:
 1. Storage disabled application server(s)
@@ -133,7 +133,7 @@ Target system should consist of:
 Due to changes in class loader, required classes must be placed directly in $DOMAIN/lib
 
 
-### Add Spring and commons logging do domain directory at Application and Cache servers
+### Add Spring and commons logging to domain directory on Application and Cache servers
 
 ```bash
 DOMAIN=>>>domain directory put here<<<
@@ -154,7 +154,8 @@ rm -rf /tmp/spring-framework-4.3.8.RELEASE
 rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip 
 ```
 
-### Add to WebLogic $DOMAIN/lib directory at Application and Cache servers
+### Add to WebLogic $DOMAIN/lib directory on Application and Cache servers
+
 
 ```
 coherence-spring-integration-2.0.0-SNAPSHOT.jar
@@ -187,7 +188,7 @@ To register $DOMAIN/lib packages and JVM arguments, restart application and stor
 Use WebLogic tools or console to deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar on storage enabled cache servers
 
 
-After deployment you should see lines similar to presented below in server's log.
+After deployment you should see lines similar to presented below in server log.
 
 ```
 ####<Jul 21, 2017, 1:03:27,987 PM UTC> <Info> <J2EE> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '6' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001b> <1500642207987> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-160151> <Registered library Extension-Name: CacheNodeSpring-1 (JAR).> 
@@ -225,7 +226,7 @@ Start of GAR service results in spawning number of Coherence threads. Note that 
 
 ## 1. Start CacheNodeSpring-1.0.0-SNAPSHOT application in WebLogic console
 
-Use WebLogic console to start CacheNodeSpring-1.0.0-SNAPSHOT application. It will start Coherence service threads. Note that Coherence threads will have in its name :trivial-scope: what is a service communication scope defined in cache config files.
+Use WebLogic console to start CacheNodeSpring-1.0.0-SNAPSHOT application. It will start Coherence service threads. Note that Coherence threads will have in its name :trivial-scope: which is a service communication scope defined in cache config files.
 
 
 After start you should see lines similar to presented below in server's log.
@@ -399,7 +400,7 @@ Build-Jdk: 1.8.0_121
 Class-Path: lib/model.jar
 ```
 
-## Class loader does not refresh classes from undeployed applications
+## Class loader does not refresh classes owned by undeployed applications
 
 Redeploy of application or undeploy and deploy in the same session does not refresh classes. Application will be effectively no redeployed. 
 
@@ -407,7 +408,7 @@ Known workaround: after undeploy Activate Changes in WebLogic Change Center. Thi
 
 ## Maven GAR support does not work
 
-Maven plugins presented in product documentation does not work. It breaks documented contract: https://docs.oracle.com/middleware/1221/core/MAVEN/coherence_project.htm#MAVEN8912
+Maven plugins presented in product documentation do not work. It breaks documented contract: https://docs.oracle.com/middleware/1221/core/MAVEN/coherence_project.htm#MAVEN8912
 
 
 ```bash
