@@ -88,7 +88,7 @@ mvn install:install-file  \
 cd -
 ```
 
-Having Coherence in your local repo you can build the aplication.
+Having Coherence and Coherence Spring in your local maven repo you can build the aplication.
 
 ```bash
 git clone https://github.com/rstyczynski/CacheApp.git
@@ -103,7 +103,7 @@ Build of artefacts generates jar/gar/war modules located in module's target dire
 
 ```bash
 function showAll {
-ls ~/.m2/repository/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/coherence-spring-2.0.0-SNAPSHOT.jar 
+ls ~/.m2/repository/com/oracle/coherence/spring/coherence-spring-integration/2.0.0-SNAPSHOT/coherence-spring-integration-2.0.0-SNAPSHOT.jar 
 ls CacheConfig/target/*.jar
 ls CacheModel/target/*.jar
 ls CacheNode/target/*.gar
