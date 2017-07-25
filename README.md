@@ -4,7 +4,7 @@ Exemplary Coherence Cache App for WebLogic 12.2.1 with Coherence Spring integrat
 
 This code demonstrates use of Coherence GAR by Web client running on multiple nodes of WebLogic 12.2.1 together with Coherence Spring integration. Spring integration is a new approach shipped with Coherence 12c, which replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behavior and unexpected side effects, sometimes called bugs.
 
-New spring integration model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syntax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/
+New spring integration model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syntax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/. You may build it by yourselves or download current SNAPSHOT. I'll poropose the latter solution.
 
 
 # Exemplary application
@@ -54,33 +54,46 @@ GAR and WAR modules takes classes and resources from DOMAIN/lib directory and ow
 
 # Build exemplary application
 
-To build application you need maven, git, java 8, and access to internet to download required java libraries. 
+To build application you need maven, git, java 8, coherence.jar and access to internet to download required java libraries. 
+
+
+As coherence is a commercial product it's not available in public repo. You need to install it in your local repo first.
+
+```bash
+COHERENCE_HOME=>>>PUT YOUR COHERENCE HOME HERE<<<
+COHERENCE_JAR=coherence-12.2.1.2.0.jar
+mvn install:install-file  \
+      -DgroupId=com.oracle.coherence  \
+      -DartifactId=coherence  \
+      -Dversion=12.2.1-2-0  \
+      -Dfile=$COHERENCE_HOME/lib/$COHERENCE_JAR  \
+      -Dpackaging=jar \
+      -DgeneratePom=true
+```
+
+You need to build or download Coherence Spring Integration. I'll proposoe to download on of recent snapshots.
+
+```
+COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
+cd /tmp
+wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
+
+mvn install:install-file  \
+      -DgroupId=com.oracle.coherence.spring  \
+      -DartifactId=coherence-spring-integration  \
+      -Dversion=2.0.0-SNAPSHOT  \
+      -Dfile=$COHERENCE_SPRING_JAR  \
+      -Dpackaging=jar \
+      -DgeneratePom=true
+cd -
+```
+
+Having Coherence in your local repo you can build the aplication.
 
 ```bash
 git clone https://github.com/rstyczynski/CacheApp.git
 cd CacheApp
-
-cd CacheConfig
-mvn clean package install
-cd ..
-
-cd CacheModel
-mvn clean package install
-cd ..
-
-
-cd CacheNode
 mvn clean package
-cd ..
-
-cd CacheNodeSpring
-mvn clean package
-cd ..
-
-cd CacheWebClient
-mvn clean package
-cd ..
-
 ```
 
 ## Know your artefacts

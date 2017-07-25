@@ -8,15 +8,12 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.oracle.adf.library</groupId>
-            <artifactId>Coherence-Runtime</artifactId>
-            <version>12.2.1-0-0</version>
-            <type>pom</type>
+            <groupId>com.oracle.coherence</groupId>
+            <artifactId>coherence</artifactId>
+	    <version>12.2.1-2-0</version>
             <scope>provided</scope>
         </dependency>
-    </dependencies>
-    
-    
+    </dependencies> 
     <build>
         <sourceDirectory>src/</sourceDirectory>
         <outputDirectory>${project.build.directory}/classes/</outputDirectory>

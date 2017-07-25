@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>CacheApp</groupId>
+    <artifactId>CacheApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>CacheConfig</module>
+        <module>CacheModel</module>
+        <module>CacheNode</module>
+        <module>CacheNodeSpring</module>
+	<module>CacheWebClient</module>
+    </modules>
+
+    <properties>
+        <!-- project dependency versions -->
+        <coherence.version>12.2.1-2-0</coherence.version>
+        <coherence.spring.version>2.0.0-SNAPSHOT</coherence.spring.version>
+        <org.springframework.version>4.3.8.RELEASE</org.springframework.version>
+
+        <!-- build properties -->
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.oracle.coherence</groupId>
+                <artifactId>coherence</artifactId>
+                <version>${coherence.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.oracle.coherence.spring</groupId>
+                <artifactId>coherence-spring</artifactId>
+                <version>${coherence.spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+    </build>
+</project>
+
