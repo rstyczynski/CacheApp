@@ -137,6 +137,7 @@ Due to changes in class loader, required classes must be placed directly in $DOM
 
 ```bash
 DOMAIN=>>>domain directory put here<<<
+COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
 
 cd /tmp
 wget http://maven.springframework.org/release/org/springframework/spring/4.3.8.RELEASE/spring-framework-4.3.8.RELEASE-dist.zip  
@@ -145,6 +146,7 @@ wget http://apache.cu.be//commons/logging/binaries/commons-logging-1.2-bin.tar.g
 tar -xvzf commons-logging-1.2-bin.tar.gz
 
 cd $DOMAIN
+wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
 cp /tmp/spring-framework-4.3.8.RELEASE/libs/* lib
 cp /tmp/commons-logging-1.2/commons-logging-1.2.jar lib
 
@@ -421,10 +423,44 @@ Known workaround: use jar plugin and change file name to gar using maven tools.
 
 Coherence spring integration requires apache logging and spring libraries, but those dependencies are not automatically added. 
 
-Known workaround: manually add commons logger and spring to $DOMAIN/lib
+Known workaround #1: add dependencies to GAR file
+
+Blow setting in pom.xml will put required libraries in GAR/lib
+
+```
+    <dependency>
+      <groupId>com.oracle.coherence.spring</groupId>
+      <artifactId>coherence-spring-integration</artifactId>
+      <version>2.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+```
+
+Known workaround #2: manually add spring integration, commons logger, and spring to $DOMAIN/lib
+
 
 ```bash
 DOMAIN=>>>domain directory put here<<<
+COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
 
 cd /tmp
 wget http://maven.springframework.org/release/org/springframework/spring/4.3.8.RELEASE/spring-framework-4.3.8.RELEASE-dist.zip  
@@ -433,6 +469,7 @@ wget http://apache.cu.be//commons/logging/binaries/commons-logging-1.2-bin.tar.g
 tar -xvzf commons-logging-1.2-bin.tar.gz
 
 cd $DOMAIN
+wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
 cp /tmp/spring-framework-4.3.8.RELEASE/libs/* lib
 cp /tmp/commons-logging-1.2/commons-logging-1.2.jar lib
 
@@ -483,10 +520,6 @@ Known workaround: instead of referring to class-scheme refer directly to Spring 
 
 # REJECTED ISSUES - Confirmed to work
 
-
 ## Class loader does not load libraries from /lib and does not load classes from / directory in GAR
 Initailly it was reported that classes are not loaded from GAR file. This side effect was observed due to missing dependencies jar, required by Spring Integration. After providing Spring core, bean, and context GAR initializes corectly. 
-
-
-
 
