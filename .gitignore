@@ -11,3 +11,9 @@ buildNumber.properties
 *.swp
 *.xml.swp
 .pom.xml.swp
+
+CacheModel/.pom.xml.swp
+
+CacheNodeSpring/.pom.xml.swp
+
+CacheWebClient/.pom.xml.swp
