@@ -484,7 +484,7 @@ Known workaround: instead of referring to class-scheme refer directly to Spring 
 # REJECTED ISSUES - Confirmed to work
 
 
-## Class loader does not load blibraries from /lib and does not load classes from / directory in GAR
+## Class loader does not load libraries from /lib and does not load classes from / directory in GAR
 Initailly it was reported that classes are not loaded from GAR file. This side effect was observed due to missing dependencies jar, required by Spring Integration. After providing Spring core, bean, and context GAR initializes corectly. 
 
 
