@@ -340,13 +340,13 @@ Use your browser to open CacheWebClient-1.0.0-SNAPSHOT URL to display cache data
 http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
 
 ```
-Raz 
-Dwa 
-Trzy 
-Cztery 
-Pięć 
-Sześć 
-Siedem 
+1 - Raz - One 
+6 - Siedem - Seven 
+5 - Sześć - Six 
+4 - Cztery - Four 
+2 - Dwa - Two 
+3 - Trzy - Three 
+5 - Pięć - Five 
 ```
 
 
@@ -374,18 +374,6 @@ Class loader in WebLogic 12.2.1 does not load resources from root of the class p
 
 Known workaround: move your resources to META-INF and prefix all resource load with META-INF e.g. classpath:META-INF/trivial.properties.
 
-## Class loader does not load classes from /lib directory in GAR
-
-WebLogic Class loader does not load classes from jar archives located in /lib directory in GAR package. It brakes documented contract: https://docs.oracle.com/middleware/1221/wls/WLCOH/create-application.htm#WLCOH719
-
-Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatically adds to classpath all jars located in $DOMAIN/lib directory.
-
-
-## Class loader does not load classes from / directory in GAR
-
-WebLogic Classloader does not load classes from classes located in / directory of GAR package. It brakes documented contract: https://docs.oracle.com/middleware/1221/wls/WLCOH/create-application.htm#WLCOH719
-
-Known workaround: add classes to (a) system classpath, or (b) $DOMAIN/lib. Note that WebLogic automatically adds to classpath all jars located in $DOMAIN/lib directory.
 
 ## Class loader does not update classpath with definition provided in MANIFEST.MF
 
@@ -491,3 +479,14 @@ Known workaround: instead of referring to class-scheme refer directly to Spring 
                 </local-scheme>
             </backing-map-scheme>
 ```
+
+
+# REJECTED ISSUES - Confirmed to work
+
+
+## Class loader does not load blibraries from /lib and does not load classes from / directory in GAR
+Initailly it was reported that classes are not loaded from GAR file. This side effect was observed due to missing dependencies jar, required by Spring Integration. After providing Spring core, bean, and context GAR initializes corectly. 
+
+
+
+

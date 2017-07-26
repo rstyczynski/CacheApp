@@ -18,29 +18,32 @@
     </dependency>
     <!-- required by Spring integration -->
     <dependency>
-       <groupId>com.oracle.coherence.spring</groupId>
-       <artifactId>coherence-spring-integration</artifactId>
+      <groupId>com.oracle.coherence.spring</groupId>
+      <artifactId>coherence-spring-integration</artifactId>
       <version>2.0.0-SNAPSHOT</version>
-      <type>pom</type>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>1.2</version>
-      <type>pom</type>
-      <scope>provided</scope>
+      <!-- <type>pom</type>
+      <scope>provided</scope> -->
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <version>4.3.8.RELEASE</version>
-      <type>pom</type>
-      <scope>provided</scope>
+      <!-- <type>pom</type>
+      <scope>provided</scope> -->
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
       <version>4.3.8.RELEASE</version>
     </dependency>
     <!-- required by Spring integration -->
@@ -54,77 +57,70 @@
     </resources>
     <outputDirectory>${project.build.directory}/classes/</outputDirectory>
     <plugins>
-      <!-- unpacked classes are not found by WLS class loader
-               <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                        <artifactItems>
-                 <artifactItem>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheConfig</artifactId>
-            <version>1.0-SNAPSHOT</version>
-                   <type>jar</type>
-                   <overWrite>false</overWrite>
-                   <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                   <destFileName>optional-new-name.jar</destFileName>
-                   <includes>**/*.class,**/*.xml</includes>
-                   <excludes>**/*test.class</excludes>
-                 </artifactItem>
-                 
-                                  <artifactItem>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheModel</artifactId>
-            <version>1.0-SNAPSHOT</version>
-                   <type>jar</type>
-                   <overWrite>false</overWrite>
-                   <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                   <destFileName>optional-new-name.jar</destFileName>
-                   <includes>**/*.class,**/*.xml</includes>
-                   <excludes>**/*test.class</excludes>
-                 </artifactItem>
-                 
-               </artifactItems>
-               
-                                   <includes>**/*.*</includes>
-               
-               <outputDirectory>${project.build.directory}/classes</outputDirectory>
-               <overWriteReleases>false</overWriteReleases>
-               <overWriteSnapshots>true</overWriteSnapshots>
-               
-                           
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
-      <!-- Libraries in /lib are not located by WLS classoader
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
+      <!-- unpacked classes are not found by WLS class loader -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>CacheApp</groupId>
+                  <artifactId>CacheConfig</artifactId>
+                  <version>1.0-SNAPSHOT</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                  <destFileName>optional-new-name.jar</destFileName>
+                  <includes>**/*.class,**/*.xml</includes>
+                  <excludes>**/*test.class</excludes>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>CacheApp</groupId>
+                  <artifactId>CacheModel</artifactId>
+                  <version>1.0-SNAPSHOT</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                  <destFileName>optional-new-name.jar</destFileName>
+                  <includes>**/*.class,**/*.xml</includes>
+                  <excludes>**/*test.class</excludes>
+                </artifactItem>
+              </artifactItems>
+              <includes>**/*.*</includes>
+              <outputDirectory>${project.build.directory}/classes</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Libraries in /lib are not located by WLS classoader -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!--      -->
       <plugin>
         <groupId>com.coderplus.maven.plugins</groupId>
         <artifactId>copy-rename-maven-plugin</artifactId>
@@ -144,64 +140,7 @@
         </executions>
       </plugin>
     </plugins>
-    <!--
-        
-<plugins>
-
-        <dependency>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheConfig</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>CacheApp</groupId>
-            <artifactId>CacheModel</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        
-        -->
-    <!-- does not work in GAR. GAR ignores MANIFEST.MF/Class-Path: !!!
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                        
-                            <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                        <manifestEntries>
-                            <Class-Path>lib/</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-
-          
-        </plugins>
-            -->
+    <!-- -->
   </build>
   <packaging>jar</packaging>
 </project>
