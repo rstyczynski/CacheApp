@@ -425,7 +425,7 @@ Coherence spring integration requires apache logging and spring libraries, but t
 
 Known workaround #1: add dependencies to GAR file
 
-Blow setting in pom.xml will put required libraries in GAR/lib
+Blow setting in pom.xml, used by proper plugin, will put required libraries in GAR/lib
 
 ```
     <dependency>

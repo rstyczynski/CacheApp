@@ -16,6 +16,9 @@
         <module>CacheNode</module>
         <module>CacheNodeSpring</module>
 	<module>CacheWebClient</module>
+	<module>CacheWebClientAlt</module>
+        <module>CacheWebApp</module>
+        <module>CacheWebAppAlt</module>
     </modules>
 
     <properties>

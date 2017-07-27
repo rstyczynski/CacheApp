@@ -24,6 +24,9 @@ public class TrivialCacheDisplay extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        
+        NamedCache cache = CacheFactory.getCache("trivialCache");
+        cache.put("0A", new TrivialRecord("0A - Zero A - Zero A"));
     }
 
 

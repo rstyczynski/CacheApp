@@ -8,9 +8,10 @@
     <caching-scheme-mapping>
         <cache-mapping>
             <cache-name>trivialCache</cache-name>
-            <scheme-name>trivialServiceScheme</scheme-name>
+            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
         </cache-mapping>
     </caching-scheme-mapping>
+    
     <caching-schemes>
         <distributed-scheme>
             <scheme-name>trivialServiceScheme</scheme-name>
@@ -37,9 +38,38 @@
             </backing-map-scheme>
             <autostart>true</autostart>
         </distributed-scheme>
+        
+        
+        <replicated-scheme>
+            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
+            <service-name>trivialReplicatedService</service-name>
+            <serializer>
+                <instance>
+                    <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
+                    <init-params>
+                        <init-param>
+                            <param-type>String</param-type>
+                            <param-value>META-INF/trivial-pof-config.xml</param-value>
+                        </init-param>
+                    </init-params>
+                </instance>
+            </serializer>
+            <backing-map-scheme>
+                <local-scheme>
+                    <listener>
+                        <class-scheme>
+                            <scheme-ref>trivialListener</scheme-ref>
+                        </class-scheme>
+                    </listener>
+                </local-scheme>
+            </backing-map-scheme>
+            <autostart>true</autostart>
+        </replicated-scheme>
+        
+        
         <class-scheme>
             <scheme-name>trivialListener</scheme-name>
-            <class-name>model.TrivialListener</class-name>
+            <class-name>logic.TrivialListener</class-name>
         </class-scheme>
     </caching-schemes>
 </cache-config>

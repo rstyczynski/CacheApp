@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public class TrivialRecord implements Serializable, PortableObject {
     
+    private static final long serialVersionUID = 0xc877ca7fL;
     private String value;
     
     public TrivialRecord(){

@@ -19,8 +19,12 @@ public class TrivialCacheWarmer extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        
+        NamedCache cache = CacheFactory.getCache("trivialCache");
+        cache.put("0", new TrivialRecord("0 - Zero - Zero"));
     }
 
+    
     @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType(CONTENT_TYPE);
