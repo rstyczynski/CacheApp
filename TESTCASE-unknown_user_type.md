@@ -7,6 +7,24 @@ R.Styczynski, July 27, 2017
 3. access to internet 
 4. OTN account to download WebLogic software
 
+## versions
+
+java -version
+java version "1.8.0_60"
+Java(TM) SE Runtime Environment (build 1.8.0_60-b27)
+Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)
+
+git --version
+git version 2.11.0 (Apple Git-81)
+
+curl --version
+curl 7.51.0 (x86_64-apple-darwin16.0) libcurl/7.51.0 SecureTransport zlib/1.2.8
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp smb smbs smtp smtps telnet tftp 
+Features: AsynchDNS IPv6 Largefile GSS-API Kerberos SPNEGO NTLM NTLM_WB SSL libz UnixSockets 
+
+WebLogic fmw_12.2.1.2.0_wls_Disk1_1of1.zip
+
+
 # Procedure
 
 ## 1. Open three terminal sessions
