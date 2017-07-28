@@ -1,15 +1,13 @@
 # Test case presenting problem with POF "unknown user type:" when replicated cache is used by two WAR modules running on the same WLS
 R.Styczynski, July 27, 2017
 
-#Requirements
+# Requirements
 1. Linux box
 2. packages: git, java8, mvn, curl
 3. access to internet 
 4. OTN account to download WebLogic software
 
-#
 # Procedure
-#
 
 ## 1. Open three terminal sessions
 a) first for Admin
