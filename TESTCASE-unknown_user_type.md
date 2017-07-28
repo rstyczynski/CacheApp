@@ -20,7 +20,7 @@ Change directory to your working one in each session
     - in Admin session
 
 ```bash
-git clone https://github.com/rstyczynski/CacheApp
+git clone -b User-type-unknown-test-case https://github.com/rstyczynski/CacheApp
 cd CacheApp
 mvn clean package
 ```
