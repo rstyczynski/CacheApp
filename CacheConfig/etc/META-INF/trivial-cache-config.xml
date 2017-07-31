@@ -8,7 +8,7 @@
     <caching-scheme-mapping>
         <cache-mapping>
             <cache-name>trivialCache</cache-name>
-            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
+            <scheme-name>trivialService</scheme-name>
         </cache-mapping>
     </caching-scheme-mapping>
     

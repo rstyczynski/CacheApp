@@ -17,3 +17,10 @@ CacheModel/.pom.xml.swp
 CacheNodeSpring/.pom.xml.swp
 
 CacheWebClient/.pom.xml.swp
+
+bin/
+install/
+tmp/
+setAppEnv.sh
+WLS12212.rsp
+
