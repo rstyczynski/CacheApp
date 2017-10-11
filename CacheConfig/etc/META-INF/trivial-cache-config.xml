@@ -14,8 +14,8 @@
     
     <caching-schemes>
         <distributed-scheme>
-            <scheme-name>trivialServiceScheme</scheme-name>
-            <service-name>trivialService</service-name>
+            <scheme-name>trivialDistributedSServiceScheme</scheme-name>
+            <service-name>trivialDistributedService</service-name>
             <serializer>
                 <instance>
                     <class-name>com.tangosol.io.pof.ConfigurablePofContext</class-name>
@@ -38,7 +38,23 @@
             </backing-map-scheme>
             <autostart>true</autostart>
         </distributed-scheme>
-        
+       
+      <near-scheme>
+         <scheme-name>trivialNearServiceScheme</scheme-name>
+         <front-scheme>
+            <local-scheme/>
+         </front-scheme>
+         <back-scheme>
+            <distributed-scheme>
+               <scheme-name>trivialDistributedSServiceScheme</scheme-name>
+               <backing-map-scheme>
+                  <local-scheme/>
+               </backing-map-scheme>
+               <autostart>true</autostart>
+            </distributed-scheme>
+         </back-scheme>
+      </near-scheme>
+ 
         
         <replicated-scheme>
             <scheme-name>trivialReplicatedServiceScheme</scheme-name>
