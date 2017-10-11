@@ -135,8 +135,10 @@ g) Press: Create, Next, and Finish
 ## 7. start Admin
     - in Admin session
 
+```bash
 source setAppEnv.sh
-$DOMAIN_HOME/bin/startWebLogic.sh 
+$DOMAIN_HOME/bin/startWebLogic.sh
+```
 
 
 ## 8. Configure WebLogic domain
