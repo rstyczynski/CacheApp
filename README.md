@@ -1,525 +1,382 @@
-# CacheApp
+# Test case presenting problem with POF "unknown user type:" when replicated cache is used by two WAR modules running on the same WLS
+R.Styczynski, July 27, 2017
 
-Exemplary Coherence Cache App for WebLogic 12.2.1 with Coherence Spring integration.
+# Requirements
+1. Linux box
+2. packages: git, java8, mvn, curl
+3. access to internet 
+4. OTN account to download WebLogic software
 
-This code demonstrates use of Coherence GAR by Web client running on multiple nodes of WebLogic 12.2.1 together with Coherence Spring integration. Spring integration is a new approach shipped with Coherence 12c, which replaces old style CacheAwareCacheFactory. Note that WebLogic 12.2.1 introduced changes in class loading (https://docs.oracle.com/middleware/1221/wls/NOTES/whatsnew.htm#NOTES550), what is visible in both change of the behavior and unexpected side effects, sometimes called bugs.
+## versions
 
-New spring integration model is described here: http://coherence.java.net/coherence-spring/1.0.0/index.html Note that it changes both XML syntax, and XML header where Coherence Namespaces are used in XML schema to automatically load required schema handlers. Project is currently finalizing support for WebLogic 12.2.1. Home page of new version is available here: http://coherence.java.net/coherence-spring/2.0.0-SNAPSHOT/. You may build it by yourselves or download current SNAPSHOT. I'll poropose the latter solution.
+java -version
+java version "1.8.0_60"
+Java(TM) SE Runtime Environment (build 1.8.0_60-b27)
+Java HotSpot(TM) 64-Bit Server VM (build 25.60-b23, mixed mode)
 
+git --version
+git version 2.11.0 (Apple Git-81)
 
-# Exemplary application
+curl --version
+curl 7.51.0 (x86_64-apple-darwin16.0) libcurl/7.51.0 SecureTransport zlib/1.2.8
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp smb smbs smtp smtps telnet tftp 
+Features: AsynchDNS IPv6 Largefile GSS-API Kerberos SPNEGO NTLM NTLM_WB SSL libz UnixSockets 
 
-Exemplary application is build with use of minimal lines of code, however consist of several modules, simulating real life enterprise class application. 
-
-The application consist of:
-1. configuration files
-2. data model
-3. cache service w/o Spring integration
-4. cache service with Spring integration
-5. web client
-
-Each of them is a separated module. In this example, each module is build as a separated physical set of files controlled by Maven. Note that cache service is prepared in two modes: with Spring integration, and without. 
-
-### Configuration
-
-Application configuration is based on two ways: (a) cache, and (b) client
-
-Cache configuration starts in GAR/META-INF/coherence-application.xml which points to CONFIG/META-INF/trivial-spring-cache-config.xml, which initializes Spring context as described in META-INF/trivial-application-context.xml.
-
-Client configuration is started with META-INF/trivial-cache-config.xml set by JVM argument tangosol.coherence.cacheconfig
-
-### Library layout
-
-GAR and WAR modules takes classes and resources from DOMAIN/lib directory and own package. Note that due to errors classes are not loaded from GAR so all the classes have to be stored in DOMAIN/lib or at SYSTEM level.
-
-```
- \
- |--GAR
- |    \-DOMAIN/lib
- |       |---configuration.jar
- |       |---model.jar 
- |       |---coherence-spring.jar
- |       |
- |       \-SYSTEM
- \--WAR
-      |-servlets.jar
-      |
-      \-DOMAIN/lib
-         |---configuration.jar
-         |---model.jar
-         |---coherence-spring.jar
-         |
-         \-SYSTEM
-```
-
-# Build exemplary application
-
-To build application you need maven, git, java 8, coherence.jar and access to internet to download required java libraries. 
+WebLogic fmw_12.2.1.2.0_wls_Disk1_1of1.zip
 
 
-As coherence is a commercial product it's not available in public repo. You need to install it in your local repo first.
+# Procedure
+
+## 1. Open three terminal sessions
+a) first for Admin
+b) second for Server-0
+c) third for deployments
+
+Change directory to your working one in each session
+
+## 2. Clone and build CacheApp
+    - in Admin session
 
 ```bash
-COHERENCE_HOME=>>>PUT YOUR COHERENCE HOME HERE<<<
-COHERENCE_JAR=coherence-12.2.1.2.0.jar
-mvn install:install-file  \
-      -DgroupId=com.oracle.coherence  \
-      -DartifactId=coherence  \
-      -Dversion=12.2.1-2-0  \
-      -Dfile=$COHERENCE_HOME/lib/$COHERENCE_JAR  \
-      -Dpackaging=jar \
-      -DgeneratePom=true
-```
-
-You need to build or download Coherence Spring Integration. I'll propose to download one of recent snapshots.
-
-```
-COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
-cd /tmp
-wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
-
-mvn install:install-file  \
-      -DgroupId=com.oracle.coherence.spring  \
-      -DartifactId=coherence-spring-integration  \
-      -Dversion=2.0.0-SNAPSHOT  \
-      -Dfile=$COHERENCE_SPRING_JAR  \
-      -Dpackaging=jar \
-      -DgeneratePom=true
-cd -
-```
-
-Having Coherence and Coherence Spring in your local maven repo you can build the aplication.
-
-```bash
-git clone https://github.com/rstyczynski/CacheApp.git
+git clone -b User-type-unknown-test-case https://github.com/rstyczynski/CacheApp
 cd CacheApp
 mvn clean package
 ```
 
-## Know your artefacts
+## 3. set env
+    - in Admin session
 
-Build of artefacts generates jar/gar/war modules located in module's target directory. Use below bash script to see location of generated modules.
+```bash
+cat > setAppEnv.sh <<EOF
+if [ -f CacheConfig/pom.xml ]; then
+  export APP_HOME=$PWD
+  export ORACLE_HOME=$PWD/bin/WLS12212
+  export CLASSPATH=$PWD/bin/WLS12212/wlserver/server/lib/weblogic.jar
+  export DOMAIN_HOME=$PWD/bin/WLS12212/user_projects/domains/base_domain
+else
+  echo "###"
+  echo "### ERROR! You have to be in CacheApp directory. Clone the app first."
+  echo "###"
+  unset APP_HOME
+  unset ORACLE_HOME
+  unset CLASSPATH
+  unset DOMAIN_HOME
+fi
+EOF
+```
+
+## 4. Download WebLogic 12.2.1.2 from OTN
+    - in Admin session
+
+```bash
+source setAppEnv.sh
+mkdir $APP_HOME/install
+```
+
+Write downloaded fmw_12.2.1.2.0_wls_Disk1_1of1.zip to install dir
+
+```bash
+cd $APP_HOME/install
+unzip fmw_12.2.1.2.0_wls_Disk1_1of1.zip
+```
+
+## 5. Install Weblogic
+    - in Admin session
+
+```bash
+source setAppEnv.sh
+mkdir $APP_HOME/bin
+mkdir $APP_HOME/tmp
+cat > $APP_HOME/tmp/oraInst.loc <<EOF
+inventory_loc=$APP_HOME/tmp/oraInventory
+inst_group=oinstall
+EOF
+
+cat > $APP_HOME/tmp/WLS12212.rsp <<EOF
+[ENGINE]
+Response File Version=1.0.0.0.0
+
+[GENERIC]
+DECLINE_AUTO_UPDATES=true
+MOS_USERNAME=
+MOS_PASSWORD=<SECURE VALUE>
+AUTO_UPDATES_LOCATION=
+SOFTWARE_UPDATES_PROXY_SERVER=
+SOFTWARE_UPDATES_PROXY_PORT=
+SOFTWARE_UPDATES_PROXY_USER=
+SOFTWARE_UPDATES_PROXY_PASSWORD=<SECURE VALUE>
+ORACLE_HOME=$ORACLE_HOME
+INSTALL_TYPE=Complete with Examples
+EOF
+
+java -jar $AP_HOME/install/fmw_12.2.1.2.0_wls_Disk1_1of1/fmw_12.2.1.2.0_wls.jar  -silent -responseFile $APP_HOME/tmp/WLS12212.rsp -invPtrLoc $APP_HOME/tmp/oraInst.loc
+```
+
+## 6. Prepare base domain
+    - in Admin session
+
+```bash
+source setAppEnv.sh
+$ORACLE_HOME/oracle_common/common/bin/config.sh 
+```
+
+It will open GUI. Select options:
+a) Create a new domain
+b) Select templates:
+       (1) Basic
+       (2) WebLogic Coherence
+c) user: weblogic, password: welcome1
+d) Development mode
+e) Configure Administration Server
+f) Name: AdminServer, Listen address: localhost, Listen port 7001 
+g) Press: Create, Next, and Finish
+
+
+## 7. start Admin
+    - in Admin session
+
+source setAppEnv.sh
+$DOMAIN_HOME/bin/startWebLogic.sh 
+
+
+## 8. Configure WebLogic domain
+    - in Server-0 session
+
+```bash
+source setAppEnv.sh
+
+cat > $APP_HOME/tmp/prepareDomain.wlst <<EOF
+
+connect('weblogic','welcome1','t3://localhost:7001') 
+
+edit()
+startEdit()
+
+cd('/')
+cmo.createCluster('AppTier')
+cd('/Clusters/AppTier')
+cmo.setClusterMessagingMode('unicast')
+
+cd('/')
+cmo.createCoherenceClusterSystemResource('Coherence-0')
+cd('/CoherenceClusterSystemResources/Coherence-0/CoherenceClusterResource/Coherence-0/CoherenceClusterParams/Coherence-0')
+cmo.setClusteringMode('multicast')
+cmo.setClusterListenPort(7574)
+cmo.setMulticastListenAddress('231.1.1.1')
+cmo.setTransport('udp')
+cmo.setTimeToLive(0)
+
+cd('/')
+cmo.createServer('Server-0')
+cd('/Servers/Server-0')
+cmo.setListenAddress('')
+cmo.setListenPort(9001)
+cmo.setListenAddress('localhost')
+cmo.setListenPortEnabled(true)
+cmo.setAdministrationPort(9002)
+
+cmo.setCluster(getMBean('/Clusters/AppTier'))
+cmo.setCoherenceClusterSystemResource(getMBean('/CoherenceClusterSystemResources/Coherence-0'))
+cd('/CoherenceClusterSystemResources/Coherence-0')
+cmo.addTarget(getMBean('/Servers/Server-0'))
+
+activate()
+EOF
+
+java weblogic.WLST tmp/prepareDomain.wlst 
+```
+
+## 9. start Server-0
+    - in Server-0 session
 
 
 ```bash
-function showAll {
-ls ~/.m2/repository/com/oracle/coherence/spring/coherence-spring-integration/2.0.0-SNAPSHOT/coherence-spring-integration-2.0.0-SNAPSHOT.jar 
-ls CacheConfig/target/*.jar
-ls CacheModel/target/*.jar
-ls CacheNode/target/*.gar
-ls CacheNodeSpring/target/*.gar
-ls CacheWebClient/target/*.war
+source setAppEnv.sh 
+export JAVA_OPTIONS="-Dtangosol.coherence.cacheconfig=$APP_HOME/CacheConfig/etc/META-INF/trivial-cache-config.xml"
+
+mkdir $DOMAIN_HOME/servers/Server-0
+mkdir $DOMAIN_HOME/servers/Server-0/security
+echo "username=weblogic 
+password=welcome1" > $DOMAIN_HOME/servers/Server-0/security/boot.properties
+
+function restartWLS {
+kill %1
+rm $DOMAIN_HOME/servers/Server-0/logs/Server-0.*
+mkdir $DOMAIN_HOME/servers/Server-0/logs
+$DOMAIN_HOME/bin/startManagedWebLogic.sh Server-0  http://localhost:7001 2>&1 >$DOMAIN_HOME/servers/Server-0/logs/Server-0.out &
 }
-
-showAll
+restartWLS
+tail -f $DOMAIN_HOME/servers/Server-0/logs/Server-0.out
 ```
 
-# Prepare servers
+## 10. deploy first app
+    - in deployments session
 
-Some preparations need to be done at servers. Apart from preparation of Coherence elements, it's mandatory to put required jars in domain's lib directory.
-
-## 1. Configure Weblogic
-
-WebLogic has to be prepared for deployment of application, data tiers and Coherence cluster.  Instructions for that are out of scope of this description. Please refer to Oracle documentation: https://docs.oracle.com/middleware/1221/wls/CLUST/coherence.htm#CLUST629
-
-Target system should consist of:
-1. Storage disabled application server(s)
-2. Storage enabled storage server(s)
-3. Coherence cluster
-
-
-## 2. Put required libraries in domain lib
-
-Due to changes in class loader, required classes must be placed directly in $DOMAIN/lib
-
-
-### Add Spring and commons logging to domain directory on Application and Cache servers
+This application will initialise POF structures
 
 ```bash
-DOMAIN=>>>domain directory put here<<<
-COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
-
-cd /tmp
-wget http://maven.springframework.org/release/org/springframework/spring/4.3.8.RELEASE/spring-framework-4.3.8.RELEASE-dist.zip  
-unzip spring-framework-4.3.8.RELEASE-dist.zip 
-wget http://apache.cu.be//commons/logging/binaries/commons-logging-1.2-bin.tar.gz
-tar -xvzf commons-logging-1.2-bin.tar.gz
-
-cd $DOMAIN
-wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
-cp /tmp/spring-framework-4.3.8.RELEASE/libs/* lib
-cp /tmp/commons-logging-1.2/commons-logging-1.2.jar lib
-
-rm -rf /tmp/commons-logging-1.2
-rm -f /tmp/commons-logging-1.2-bin.tar.gz
-rm -rf /tmp/spring-framework-4.3.8.RELEASE
-rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip 
+source setAppEnv.sh 
+cd $APP_HOME
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheWebApp/target/CacheWebApp-1.0-SNAPSHOT.ear  -targets Server-0
 ```
 
-### Add to WebLogic $DOMAIN/lib directory on Application and Cache servers
-
-
-```
-coherence-spring-integration-2.0.0-SNAPSHOT.jar
-CacheConfig-1.0.0-SNAPSHOT.jar 
-CacheModel-1.0.0-SNAPSHOT.jar 
-```
-
-
-## 3. Prepare arguments at Application servers
-
-In opposite to cache storage nodes, which are configured by GAR archives, application nodes have to be informed about cache layout. It's achieved by using regular JVM argument 'tangosol.coherence.cacheconfig' pointing to cache config file located in $DOMAN/lib/CacheConfig-1.0.0-SNAPSHOT.jar Cache config is a system wide configuration thus this setup sounds reasonable. Using this technique you may specify special cache config file for proxy nodes.
-
+### 10.1. check result
+    - in deployments session
 
 ```bash
--Dtangosol.coherence.cacheconfig=META-INF/trivial-cache-config.xml
+curl http://localhost:9001/CacheWebClient/CacheDisplay
 ```
 
-Note that cluster configuration is moved to WebLogic. There is no tangosol-override.xml file anymore. 
-
-
-## 4. Restart Application and Cache servers
-
-To register $DOMAIN/lib packages and JVM arguments, restart application and storage nodes. 
-
-
-# Deploy your artefacts
-
-## 1. Deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar 
-
-Use WebLogic tools or console to deploy CacheNodeSpring-1.0.0-SNAPSHOT.gar on storage enabled cache servers
-
-
-After deployment you should see lines similar to presented below in server log.
-
 ```
-####<Jul 21, 2017, 1:03:27,987 PM UTC> <Info> <J2EE> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '6' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001b> <1500642207987> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-160151> <Registered library Extension-Name: CacheNodeSpring-1 (JAR).> 
-####<Jul 21, 2017, 1:04:15,253 PM UTC> <Info> <Health> <machine3> <CacheServer-4> <weblogic.GCMonitor> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000016> <1500642255253> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-310002> <50% of the total memory in the server is free.> 
-####<Jul 21, 2017, 1:04:33,51 PM UTC> <Info> <CONCURRENCY> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273051> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162601> <Creating ContextService "DefaultContextService" (partition="DOMAIN", module="null", application="CacheNodeSpring-1.0-SNAPSHOT")> 
-####<Jul 21, 2017, 1:04:33,51 PM UTC> <Info> <CONCURRENCY> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273051> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162600> <Creating ManagedThreadFactory "DefaultManagedThreadFactory" (partition="DOMAIN", module="null", application="CacheNodeSpring-1.0-SNAPSHOT")> 
-####<Jul 21, 2017, 1:04:33,52 PM UTC> <Info> <CONCURRENCY> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273052> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162610> <Creating ManagedExecutorService "DefaultManagedExecutorService" (partition="DOMAIN", module="null", application="CacheNodeSpring-1.0-SNAPSHOT", workmanager="default")> 
-####<Jul 21, 2017, 1:04:33,56 PM UTC> <Info> <CONCURRENCY> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273056> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162611> <Creating ManagedScheduledExecutorService "DefaultManagedScheduledExecutorService" (partition="DOMAIN", module="null", application="CacheNodeSpring-1.0-SNAPSHOT", workmanager="default")> 
-####<Jul 21, 2017, 1:04:33,57 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273057> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT is transitioning from STATE_NEW to STATE_PREPARED on server CacheServer-4.> 
-####<Jul 21, 2017, 1:04:33,63 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001c> <1500642273063> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT successfully transitioned from STATE_NEW to STATE_PREPARED on server CacheServer-4.> 
+<html>
+<head><title>Cache reader</title></head>
+<body>
+<p/>
+0 - Zero - Zero->weblogic.utils.classloaders.ChangeAwareClassLoader@50099fc5 finder: weblogic.utils.classloaders.CodeGenClassFinder@121c7409 annotation: CacheWebApp-1.0-SNAPSHOT@CacheWebClient
+</br>
+</body>
+</html>
 ```
 
-
-## 2. Deploy CacheWebClient-1.0.0-SNAPSHOT on WebLogic Application servers
-
-
-Use WebLogic console to deploy CacheWebClient-1.0.0-SNAPSHOT on storage disabled Application servers.
-
-
-After deployment you should see lines similar to presented below in server's log.
-
-```
-####<Jul 21, 2017, 1:09:02,877 PM UTC> <Info> <CONCURRENCY> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542877> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162601> <Creating ContextService "DefaultContextService" (partition="DOMAIN", module="null", application="CacheWebClient-1.0-SNAPSHOT")> 
-####<Jul 21, 2017, 1:09:02,877 PM UTC> <Info> <CONCURRENCY> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542877> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162600> <Creating ManagedThreadFactory "DefaultManagedThreadFactory" (partition="DOMAIN", module="null", application="CacheWebClient-1.0-SNAPSHOT")> 
-####<Jul 21, 2017, 1:09:02,894 PM UTC> <Info> <CONCURRENCY> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542894> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162610> <Creating ManagedExecutorService "DefaultManagedExecutorService" (partition="DOMAIN", module="null", application="CacheWebClient-1.0-SNAPSHOT", workmanager="default")> 
-####<Jul 21, 2017, 1:09:02,895 PM UTC> <Info> <CONCURRENCY> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542895> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-2162611> <Creating ManagedScheduledExecutorService "DefaultManagedScheduledExecutorService" (partition="DOMAIN", module="null", application="CacheWebClient-1.0-SNAPSHOT", workmanager="default")> 
-####<Jul 21, 2017, 1:09:02,896 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642542896> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT is transitioning from STATE_NEW to STATE_PREPARED on server AppServer-1.> 
-####<Jul 21, 2017, 1:09:03,157 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '8' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001a> <1500642543157> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT successfully transitioned from STATE_NEW to STATE_PREPARED on server AppServer-1.> 
-```
-
-# Start & verify
-
-Start of GAR service results in spawning number of Coherence threads. Note that each set of threads is separated from another GAR by (a) class loader and (b) prefix added to thread name. It physically separates service from other applications running in WebLogic server. 
-
-
-## 1. Start CacheNodeSpring-1.0.0-SNAPSHOT application in WebLogic console
-
-Use WebLogic console to start CacheNodeSpring-1.0.0-SNAPSHOT application. It will start Coherence service threads. Note that Coherence threads will have in its name :trivial-scope: which is a service communication scope defined in cache config files.
-
-
-After start you should see lines similar to presented below in server's log.
-
-```
-####<Jul 21, 2017, 1:05:01,922 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001d> <1500642301922> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT is transitioning from STATE_PREPARED to STATE_ADMIN on server CacheServer-4.> 
-####<Jul 21, 2017, 1:05:01,991 PM UTC> <Info> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642301991> <[severity-value: 64] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <2017-07-21 13:05:01.991/1085.630 Oracle Coherence GE 12.2.1.2.0 <Info> (thread=[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)', member=10): Loaded cache configuration from "jar:file:/u01/oracle/fmw12.2.1/config/domains/cohmt_domain/CacheConfig-1.0-SNAPSHOT.jar!/META-INF/trivial-spring-cache-config.xml"> 
-####<Jul 21, 2017, 1:05:02,58 PM UTC> <Info> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302058> <[severity-value: 64] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <2017-07-21 13:05:02.058/1085.697 Oracle Coherence GE 12.2.1.2.0 <Info> (thread=[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)', member=10): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory> 
-####<Jul 21, 2017, 1:05:02,62 PM UTC> <Info> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302062> <[severity-value: 64] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <2017-07-21 13:05:02.062/1085.701 Oracle Coherence GE 12.2.1.2.0 <Info> (thread=[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)', member=10): Restarting Service: XXX:trivialService> 
-####<Jul 21, 2017, 1:05:02,73 PM UTC> <Info> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302073> <[severity-value: 64] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <2017-07-21 13:05:02.073/1085.712 Oracle Coherence GE 12.2.1.2.0 <Info> (thread=DistributedCache:trivial-service:trivialService, member=10): Loaded POF configuration from "jar:file:/u01/oracle/fmw12.2.1/config/domains/cohmt_domain/CacheConfig-1.0-SNAPSHOT.jar!/META-INF/trivial-pof-config.xml"> 
-####<Jul 21, 2017, 1:05:02,87 PM UTC> <Info> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302087> <[severity-value: 64] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <2017-07-21 13:05:02.087/1085.726 Oracle Coherence GE 12.2.1.2.0 <Info> (thread=DistributedCache:trivial-service:trivialService, member=10): Loaded included POF configuration from "jar:file:/u01/oracle/fmw12.2.1/product/oracle_home/coherence/lib/coherence.jar!/coherence-pof-config.xml"> 
-####<Jul 21, 2017, 1:05:02,316 PM UTC> <Trace> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302316> <[severity-value: 256] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <[com.tangosol.coherence.component.util.logOutput.Jdk:log] 2017-07-21 13:05:02.316/1085.954 Oracle Coherence GE 12.2.1.2.0 <D5> (thread=DistributedCache:trivial-service:trivialService, member=10): Service XXX:trivialService joined the cluster with senior service member 10> 
-####<Jul 21, 2017, 1:05:02,397 PM UTC> <Trace> <com.oracle.coherence> <machine3> <CacheServer-4> <Logger@9236199 12.2.1.2.0> <<anonymous>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-00000002> <1500642302397> <[severity-value: 256] [rid: 0:5] [partition-id: 0] [partition-name: DOMAIN] > <BEA-000000> <[com.tangosol.coherence.component.util.logOutput.Jdk:log] 2017-07-21 13:05:02.397/1086.035 Oracle Coherence GE 12.2.1.2.0 <D5> (thread=DistributedCache:trivial-service:trivialService, member=10): This member has become the distribution coordinator for MemberSet(Size=1
-  Member(Id=10, Timestamp=2017-07-21 12:47:10.589, Address=10.0.15.23:7375, MachineId=17612, Location=site:site-1,rack:rack-1,machine:machine3,process:18298,member:CacheServer-4, Role=CacheCluster-1)
-  )> 
-####<Jul 21, 2017, 1:05:02,411 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001d> <1500642302411> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT successfully transitioned from STATE_PREPARED to STATE_ADMIN on server CacheServer-4.> 
-####<Jul 21, 2017, 1:05:02,412 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001d> <1500642302412> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT is transitioning from STATE_ADMIN to STATE_ACTIVE on server CacheServer-4.> 
-####<Jul 21, 2017, 1:05:02,412 PM UTC> <Info> <Deployer> <machine3> <CacheServer-4> <[STANDBY] ExecuteThread: '3' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <f92275e6-f186-47a4-9b43-31ba00ccf381-0000001d> <1500642302412> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheNodeSpring-1.0-SNAPSHOT of application CacheNodeSpring-1.0-SNAPSHOT successfully transitioned from STATE_ADMIN to STATE_ACTIVE on server CacheServer-4.> 
-```
-
-You will notice initialization of Spring Beans in std out file. 
-
-```
->>>>>TrivialListener. Initialized by Spring.
->>>>>TrivialInit. Initialized by Spring.
-```
-
-## 2. Start CacheWebClient-1.0.0-SNAPSHOT 
-
-Use WebLogic console to start CacheWebClient-1.0.0-SNAPSHOT application. 
-
-
-After start you should see lines similar to presented below in server's log.
-
-```
-####<Jul 21, 2017, 1:10:06,693 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001b> <1500642606693> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT is transitioning from STATE_PREPARED to STATE_ADMIN on server AppServer-1.> 
-####<Jul 21, 2017, 1:10:06,706 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001b> <1500642606706> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT successfully transitioned from STATE_PREPARED to STATE_ADMIN on server AppServer-1.> 
-####<Jul 21, 2017, 1:10:06,831 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001b> <1500642606831> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149059> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT is transitioning from STATE_ADMIN to STATE_ACTIVE on server AppServer-1.> 
-####<Jul 21, 2017, 1:10:06,831 PM UTC> <Info> <Deployer> <machine1> <AppServer-1> <[STANDBY] ExecuteThread: '7' for queue: 'weblogic.kernel.Default (self-tuning)'> <<WLS Kernel>> <> <a320e87d-850e-4845-b245-7bf9a335f923-0000001b> <1500642606831> <[severity-value: 64] [rid: 0] [partition-id: 0] [partition-name: DOMAIN] > <BEA-149060> <Module CacheWebClient-1.0-SNAPSHOT.war of application CacheWebClient-1.0-SNAPSHOT successfully transitioned from STATE_ADMIN to STATE_ACTIVE on server AppServer-1.> 
-```
-
-# Use
-
-## 1. Use browser to warm up cache
-
-Use your browser to open CacheWebClient-1.0.0-SNAPSHOT URL to initialize cache with exemplary data.
-
-http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheWarmer
-
-```
-Filling the cache.
-
-Done.
-```
-
-
-### 1.1. Check Application server standard out 
-
-To verify that pof serializer class works
+### 10.2. Check std out of Server-0
 
 ```
 >>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Serializer initialized. Done.
->>>>>Record.writeExternal. Done.
->>>>>Record.readExternal. Done.
+>>>>>TrivialListener. Insert:CacheEvent{LocalCache inserted: key=0, value=0 - Zero - Zero}
 ```
 
-### 1.2. Check Cache server standard out 
-
-To verify that listener class works
-
-```
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DC0A497C40E154E0131), old value=Binary(length=15, value=0x15A90F00004E07417273656E616C40), new value=Binary(length=15, value=0x15A90F00004E07417273656E616C40)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D859DA2AB02154E0132), old value=Binary(length=19, value=0x15A90F00004E0B4173746F6E2056696C6C6140), new value=Binary(length=19, value=0x15A90F00004E0B4173746F6E2056696C6C6140)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D93DF9BDB0C154E0133), old value=Binary(length=15, value=0x15A90F00004E074275726E6C657940), new value=Binary(length=15, value=0x15A90F00004E074275726E6C657940)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=9, value=0x0DCFF6C042154E0134), old value=Binary(length=15, value=0x15A90F00004E074368656C73656140), new value=Binary(length=15, value=0x15A90F00004E074368656C73656140)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DD9B4F9B20E154E0135), old value=Binary(length=22, value=0x15A90F00004E0E4372797374616C2050616C61636540), new value=Binary(length=22, value=0x15A90F00004E0E4372797374616C2050616C61636540)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D9C8DCCDD02154E0136), old value=Binary(length=15, value=0x15A90F00004E0745766572746F6E40), new value=Binary(length=15, value=0x15A90F00004E0745766572746F6E40)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0D8ACFF5AD0C154E0137), old value=Binary(length=17, value=0x15A90F00004E0948756C6C204369747940), new value=Binary(length=17, value=0x15A90F00004E0948756C6C204369747940)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DE4C6F2D901154E0138), old value=Binary(length=22, value=0x15A90F00004E0E4C6569636573746572204369747940), new value=Binary(length=22, value=0x15A90F00004E0E4C6569636573746572204369747940)}
->>>>>TrivialListener. Update:CacheEvent{LocalCache updated: key=Binary(length=10, value=0x0DF284CBA90F154E0139), old value=Binary(length=17, value=0x15A90F00004E094C69766572706F6F6C40), new value=Binary(length=17, value=0x15A90F00004E094C69766572706F6F6C40)}
-```
-
-## 2. Use browser to read cache
-
-Use your browser to open CacheWebClient-1.0.0-SNAPSHOT URL to display cache data.
-
-http://machine1:8001/CacheWebClient-1.0-SNAPSHOT/CacheDisplay
-
-```
-1 - Raz - One 
-6 - Siedem - Seven 
-5 - Sześć - Six 
-4 - Cztery - Four 
-2 - Dwa - Two 
-3 - Trzy - Three 
-5 - Pięć - Five 
-```
-
-
-### 2.1. Check Application server standard out 
-
-
-```
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
->>>>>Record.readExternal. Done.
-```
-
-
-# Known limitations
-
-## Class loader does not load resources from root
-
-Class loader in WebLogic 12.2.1 does not load resources from root of the class path. 
-
-Known workaround: move your resources to META-INF and prefix all resource load with META-INF e.g. classpath:META-INF/trivial.properties.
-
-
-## Class loader does not update classpath with definition provided in MANIFEST.MF
-
-According to Java specification Class-path: line in MANIFEST.MF should update classpath. It's not working with GAR.
-
-```
-Manifest-Version: 1.0
-Archiver-Version: Plexus Archiver
-Created-By: Apache Maven
-Built-By: rstyczynski
-Build-Jdk: 1.8.0_121
-Class-Path: lib/model.jar
-```
-
-## Class loader does not refresh classes owned by undeployed applications
-
-Redeploy of application or undeploy and deploy in the same session does not refresh classes. Application will be effectively no redeployed. 
-
-Known workaround: after undeploy Activate Changes in WebLogic Change Center. This step will remove classes from JVM. 
-
-## Maven GAR support does not work
-
-Maven plugins presented in product documentation do not work. It breaks documented contract: https://docs.oracle.com/middleware/1221/core/MAVEN/coherence_project.htm#MAVEN8912
-
+### 11. deploy second app
+###    - in deployments session
+###
+###     This application will try to use POF structures
 
 ```bash
-mvn archetype:generate \
-    -DarchetypeGroupId=com.oracle.coherence.archetype \
-    -DarchetypeArtifactId=gar-maven-archetype \
-    -DarchetypeVersion=12.2.1-0-0 \
-    -DgroupId=org.mycompany \
-    -DartifactId=my-gar-project \
-    -Dversion=1.0-SNAPSHOT 
+source setAppEnv.sh 
+cd $APP_HOME
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheWebAppAlt/target/CacheWebAppAlt-1.0-SNAPSHOT.ear  -targets Server-0
 ```
 
-results with error
-
-```
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-archetype-plugin:2.3:generate (default-cli) on project CacheApp: The desired archetype does not exist (com.oracle.coherence.archetype:gar-maven-archetype:12.2.1-0-0) -> [Help 1]
-```
-
-Known workaround: use jar plugin and change file name to gar using maven tools. 
-
-## Coherence spring integration requires external libraries
-
-Coherence spring integration requires apache logging and spring libraries, but those dependencies are not automatically added. 
-
-Known workaround #1: add dependencies to GAR file
-
-Blow setting in pom.xml, used by proper plugin, will put required libraries in GAR/lib
-
-```
-    <dependency>
-      <groupId>com.oracle.coherence.spring</groupId>
-      <artifactId>coherence-spring-integration</artifactId>
-      <version>2.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.2</version>
-    </dependency>
-   <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>4.3.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>4.3.8.RELEASE</version>
-    </dependency>
-    <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-      <version>4.3.8.RELEASE</version>
-    </dependency>
-```
-
-Known workaround #2: manually add spring integration, commons logger, and spring to $DOMAIN/lib
-
+## 11.1. check result
+    - in deployments session
 
 ```bash
-DOMAIN=>>>domain directory put here<<<
-COHERENCE_SPRING_JAR=coherence-spring-2.0.0-20170713.194841-7.jar
-
-cd /tmp
-wget http://maven.springframework.org/release/org/springframework/spring/4.3.8.RELEASE/spring-framework-4.3.8.RELEASE-dist.zip  
-unzip spring-framework-4.3.8.RELEASE-dist.zip 
-wget http://apache.cu.be//commons/logging/binaries/commons-logging-1.2-bin.tar.gz
-tar -xvzf commons-logging-1.2-bin.tar.gz
-
-cd $DOMAIN
-wget https://oss.sonatype.org/content/repositories/snapshots/com/oracle/coherence/spring/coherence-spring/2.0.0-SNAPSHOT/$COHERENCE_SPRING_JAR
-cp /tmp/spring-framework-4.3.8.RELEASE/libs/* lib
-cp /tmp/commons-logging-1.2/commons-logging-1.2.jar lib
-
-rm -rf /tmp/commons-logging-1.2
-rm -f /tmp/commons-logging-1.2-bin.tar.gz
-rm -rf /tmp/spring-framework-4.3.8.RELEASE
-rm -f /tmp/spring-framework-4.3.8.RELEASE-dist.zip 
+curl http://localhost:9001/CacheWebClientAlt/CacheDisplay
 ```
 
-## Coherence spring integration does not support schema-ref
+```html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Draft//EN">
+<HTML>
+<HEAD>
+<TITLE>Error 500--Internal Server Error</TITLE>
+</HEAD>
+<BODY bgcolor="white">
+<FONT FACE=Helvetica><BR CLEAR=all>
+<TABLE border=0 cellspacing=5><TR><TD><BR CLEAR=all>
+<FONT FACE="Helvetica" COLOR="black" SIZE="3"><H2>Error 500--Internal Server Error</H2>
+</FONT></TD></TR>
+</TABLE>
+<TABLE border=0 width=100% cellpadding=10><TR><TD VALIGN=top WIDTH=100% BGCOLOR=white><FONT FACE="Courier New"><pre>&#40;Wrapped: CacheName=trivialCache, Key=0&#41; java.io.IOException: unknown user type: model.TrivialRecord
+	at com.tangosol.coherence.component.util.CacheHandler.releaseClassLoader(CacheHandler.CDB:23)
+	at com.tangosol.coherence.component.util.CacheHandler.getCachedResource(CacheHandler.CDB:39)
+	at com.tangosol.coherence.component.util.CacheHandler.convert(CacheHandler.CDB:1)
+	at com.tangosol.coherence.component.util.CacheHandler$EntrySet$Entry.getValue(CacheHandler.CDB:2)
+	at view.TrivialCacheDisplay.doGet(TrivialCacheDisplay.java:48)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:286)
+	at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:260)
+	at weblogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:137)
+	at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:350)
+	at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:247)
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3679)
+	at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3649)
+	at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:326)
+	at weblogic.security.service.SecurityManager.runAsForUserCode(SecurityManager.java:197)
+	at weblogic.servlet.provider.WlsSecurityProvider.runAsForUserCode(WlsSecurityProvider.java:203)
+	at weblogic.servlet.provider.WlsSubjectHandle.run(WlsSubjectHandle.java:71)
+	at weblogic.servlet.internal.WebAppServletContext.doSecuredExecute(WebAppServletContext.java:2433)
+	at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2281)
+	at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2259)
+	at weblogic.servlet.internal.ServletRequestImpl.runInternal(ServletRequestImpl.java:1691)
+	at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1651)
+	at weblogic.servlet.provider.ContainerSupportProviderImpl$WlsRequestExecutor.run(ContainerSupportProviderImpl.java:270)
+	at weblogic.invocation.ComponentInvocationContextManager._runAs(ComponentInvocationContextManager.java:348)
+	at weblogic.invocation.ComponentInvocationContextManager.runAs(ComponentInvocationContextManager.java:333)
+	at weblogic.work.LivePartitionUtility.doRunWorkUnderContext(LivePartitionUtility.java:54)
+	at weblogic.work.PartitionUtility.runWorkUnderContext(PartitionUtility.java:41)
+	at weblogic.work.SelfTuningWorkManagerImpl.runWorkUnderContext(SelfTuningWorkManagerImpl.java:640)
+	at weblogic.work.ExecuteThread.execute(ExecuteThread.java:406)
+	at weblogic.work.ExecuteThread.run(ExecuteThread.java:346)
+Caused by: java.io.IOException: unknown user type: model.TrivialRecord
+	at com.tangosol.io.pof.ConfigurablePofContext.serialize(ConfigurablePofContext.java:360)
+	at com.tangosol.util.ExternalizableHelper.serializeInternal(ExternalizableHelper.java:2899)
+	at com.tangosol.util.ExternalizableHelper.toBinary(ExternalizableHelper.java:283)
+	at com.tangosol.coherence.component.util.daemon.queueProcessor.service.grid.ReplicatedCache$ConverterToInternal.convert(ReplicatedCache.CDB:6)
+	at com.tangosol.coherence.component.util.CacheHandler.releaseClassLoader(CacheHandler.CDB:15)
+	... 30 more
+Caused by: java.lang.IllegalArgumentException: unknown user type: model.TrivialRecord
+	at com.tangosol.io.pof.ConfigurablePofContext.getUserTypeIdentifier(ConfigurablePofContext.java:440)
+	at com.tangosol.io.pof.ConfigurablePofContext.getUserTypeIdentifier(ConfigurablePofContext.java:429)
+	at com.tangosol.io.pof.PofBufferWriter.writeUserType(PofBufferWriter.java:1927)
+	at com.tangosol.io.pof.PofBufferWriter.writeObject(PofBufferWriter.java:1865)
+	at com.tangosol.io.pof.ConfigurablePofContext.serialize(ConfigurablePofContext.java:354)
+	... 34 more
+</pre></FONT></TD></TR>
+</TABLE>
 
-XML Scheme reference known from Coherence config does not work in 12.2.1 with spring integration.  
+</BODY>
+</HTML>
+```
+
+### 11.2. Check std out of Server-0
 
 ```
-            <backing-map-scheme>
-                <local-scheme>
-                    <listener>
-                        <class-scheme>
-                            <scheme-ref>trivialListener</scheme-ref>
-                        </class-scheme>
-                    </listener>
-                </local-scheme>
-            </backing-map-scheme>
-            <autostart>true</autostart>
-        </distributed-scheme>
-        <class-scheme>
-            <scheme-name>trivialListener</scheme-name>
-            <class-name>model.TrivialListener</class-name>
-        </class-scheme>
-```
-
-Known workaround: instead of referring to class-scheme refer directly to Spring bean definition. 
-
-```
-            <backing-map-scheme>
-                <local-scheme>
-                    <listener>
-                        <class-scheme>
-                            <spring:bean>
-                                <spring:bean-name>trivialListener</spring:bean-name>
-                            </spring:bean>
-                        </class-scheme>
-                    </listener>
-                </local-scheme>
-            </backing-map-scheme>
+>>>>>Serializer initialized. Done.
+>>>>>TrivialListener. Insert:CacheEvent{LocalCache inserted: key=0A, value=0A - Zero A - Zero A}
+<Jul 28, 2017, 11:54:24,188 AM CEST> <Error> <HTTP> <BEA-101020> <[ServletContext@1846249541[app:CacheWebAppAlt-1.0-SNAPSHOT module:/CacheWebClientAlt path:null spec-version:3.1]] Servlet failed with an Exception
+(Wrapped: CacheName=trivialCache, Key=0) java.io.IOException: unknown user type: model.TrivialRecord
+	at com.tangosol.coherence.component.util.CacheHandler.releaseClassLoader(CacheHandler.CDB:23)
+	at com.tangosol.coherence.component.util.CacheHandler.getCachedResource(CacheHandler.CDB:39)
+	at com.tangosol.coherence.component.util.CacheHandler.convert(CacheHandler.CDB:1)
+	at com.tangosol.coherence.component.util.CacheHandler$EntrySet$Entry.getValue(CacheHandler.CDB:2)
+	at view.TrivialCacheDisplay.doGet(TrivialCacheDisplay.java:48)
+	Truncated. see log file for complete stacktrace
+Caused By: java.io.IOException: unknown user type: model.TrivialRecord
+	at com.tangosol.io.pof.ConfigurablePofContext.serialize(ConfigurablePofContext.java:360)
+	at com.tangosol.util.ExternalizableHelper.serializeInternal(ExternalizableHelper.java:2899)
+	at com.tangosol.util.ExternalizableHelper.toBinary(ExternalizableHelper.java:283)
+	at com.tangosol.coherence.component.util.daemon.queueProcessor.service.grid.ReplicatedCache$ConverterToInternal.convert(ReplicatedCache.CDB:6)
+	at com.tangosol.coherence.component.util.CacheHandler.releaseClassLoader(CacheHandler.CDB:15)
+	Truncated. see log file for complete stacktrace
+Caused By: java.lang.IllegalArgumentException: unknown user type: model.TrivialRecord
+	at com.tangosol.io.pof.ConfigurablePofContext.getUserTypeIdentifier(ConfigurablePofContext.java:440)
+	at com.tangosol.io.pof.ConfigurablePofContext.getUserTypeIdentifier(ConfigurablePofContext.java:429)
+	at com.tangosol.io.pof.PofBufferWriter.writeUserType(PofBufferWriter.java:1927)
+	at com.tangosol.io.pof.PofBufferWriter.writeObject(PofBufferWriter.java:1865)
+	at com.tangosol.io.pof.ConfigurablePofContext.serialize(ConfigurablePofContext.java:354)
+	Truncated. see log file for complete stacktrace
+> 
 ```
 
 
-# REJECTED ISSUES - Confirmed to work
+## 12. Undeploy apps
+    - in deployments session
 
-## Class loader does not load libraries from /lib and does not load classes from / directory in GAR
-Initailly it was reported that classes are not loaded from GAR file. This side effect was observed due to missing dependencies jar, required by Spring Integration. After providing Spring core, bean, and context GAR initializes corectly. 
+```bash
+source setAppEnv.sh 
+cd $APP_HOME
+
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheWebApp-1.0-SNAPSHOT -undeploy -targets Server-0
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheWebAppAlt-1.0-SNAPSHOT -undeploy -targets Server-0
+```
+
+## 13. kill Server-0 node
+    - in Server-0 session
+
+```bash
+kill %1
+```
+
+
+
 
