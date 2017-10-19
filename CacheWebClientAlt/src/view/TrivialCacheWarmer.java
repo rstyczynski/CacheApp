@@ -31,13 +31,13 @@ public class TrivialCacheWarmer extends HttpServlet {
         out.println("<p>Filling the cache</p>");
 
         NamedCache cache = CacheFactory.getCache("trivialCache");
-        cache.put("1", new TrivialRecord("1 - Raz - One"));
-        cache.put("2", new TrivialRecord("2 - Dwa - Two"));
-        cache.put("3", new TrivialRecord("3 - Trzy - Three"));
-        cache.put("4", new TrivialRecord("4 - Cztery - Four"));
-        cache.put("5", new TrivialRecord("5 - Pięć - Five"));
-        cache.put("6", new TrivialRecord("5 - Sześć - Six"));
-        cache.put("7", new TrivialRecord("6 - Siedem - Seven"));
+        cache.put("1A", new TrivialRecord("1A - Raz - One"));
+        cache.put("2A", new TrivialRecord("2A - Dwa - Two"));
+        cache.put("3A", new TrivialRecord("3A - Trzy - Three"));
+        cache.put("4A", new TrivialRecord("4A - Cztery - Four"));
+        cache.put("5A", new TrivialRecord("5A - Pięć - Five"));
+        cache.put("6A", new TrivialRecord("6A - Sześć - Six"));
+        cache.put("7A", new TrivialRecord("7A - Siedem - Seven"));
 
         out.println("<p>Done.</p>");
 

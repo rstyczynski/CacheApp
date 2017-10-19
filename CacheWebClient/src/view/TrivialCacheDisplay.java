@@ -28,11 +28,11 @@ public class TrivialCacheDisplay extends HttpServlet {
 	TrivialRecord record = new TrivialRecord("0 - Zero - Zero");
 	try {	
 		System.out.println(">>>>>Put" + record);
-        	cache.put("0A", record) ;
+        	cache.put("0", record) ;
 	} catch (Exception e) {
 		System.out.println(">>>>>Put (retry)" + record);
 		System.out.println(">>>>>Put retry reason:" + e);
-		cache.put("0A", record);
+		cache.put("0", record);
 	} 
     }
 

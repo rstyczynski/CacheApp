@@ -25,7 +25,7 @@ public class ComplexCacheDisplay extends HttpServlet {
         super.init(config);
         
         NamedCache cache = CacheFactory.getCache("complexCache");
-	ComplexRecord record = new ComplexRecord("0 - Zero - Zero");
+	ComplexRecord record = new ComplexRecord("0A - Zero - Zero");
 	try {	
 		System.out.println(">>>>>ComplexCacheDisplay.Put" + record);
         	cache.put("0A", record) ;

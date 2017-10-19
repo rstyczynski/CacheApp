@@ -40,8 +40,8 @@ public class TrivialCacheWarmer extends HttpServlet {
         cache.put("3", new TrivialRecord("3 - Trzy - Three"));
         cache.put("4", new TrivialRecord("4 - Cztery - Four"));
         cache.put("5", new TrivialRecord("5 - Pięć - Five"));
-        cache.put("6", new TrivialRecord("5 - Sześć - Six"));
-        cache.put("7", new TrivialRecord("6 - Siedem - Seven"));
+        cache.put("6", new TrivialRecord("6 - Sześć - Six"));
+        cache.put("7", new TrivialRecord("7 - Siedem - Seven"));
 
         out.println("<p>Done.</p>");
 
