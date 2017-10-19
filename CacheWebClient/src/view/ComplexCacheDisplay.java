@@ -28,11 +28,11 @@ public class ComplexCacheDisplay extends HttpServlet {
 	ComplexRecord record = new ComplexRecord("0 - Zero - Zero");
 	try {	
 		System.out.println(">>>>>ComplexCacheDisplay.Put" + record);
-        	cache.put("0A", record) ;
+        	cache.put("0", record) ;
 	} catch (Exception e) {
 		System.out.println(">>>>>ComplexCacheDisplay.Put (retry)" + record);
 		System.out.println(">>>>>ComplexCacheDisplay.Put retry reason:" + e);
-		cache.put("0A", record);
+		cache.put("0", record);
 	} 
     }
 
@@ -52,13 +52,14 @@ public class ComplexCacheDisplay extends HttpServlet {
         it = cache.entrySet().iterator();
         while (it.hasNext()) {
  	    Object value;
+            Map.Entry entry = it.next();
 	    try {	
 		System.out.println(">>>>>ComplexCacheDisplay.Get");
-        	value = it.next().getValue();
+        	value = entry.getValue();
 	    } catch (Exception e) {
 		System.out.println(">>>>>ComplexCacheDisplay.Get (retry)");
 		System.out.println(">>>>>ComplexCacheDisplay.Get retry reason:" + e);
-		value = it.next().getValue();
+		value = entry.getValue();
    	    } 
 
             out.println(value + "->" + value.getClass().getClassLoader() );

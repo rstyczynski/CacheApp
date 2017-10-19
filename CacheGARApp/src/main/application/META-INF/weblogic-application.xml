@@ -1,0 +1,7 @@
+<weblogic-application>
+       <module>
+             <name>GAR</name>
+             <type>GAR</type>
+             <path>CacheGAR-1.0-SNAPSHOT.gar</path>
+       </module>
+</weblogic-application>

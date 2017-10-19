@@ -19,6 +19,9 @@
 	<module>CacheWebClientAlt</module>
         <module>CacheWebApp</module>
         <module>CacheWebAppAlt</module>
+        <module>CacheGAR</module>
+        <module>CacheGARApp</module>
+        <module>CacheGARAppAlt</module>
     </modules>
 
     <properties>

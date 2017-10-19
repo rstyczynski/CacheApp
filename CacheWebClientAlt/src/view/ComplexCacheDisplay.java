@@ -51,16 +51,17 @@ public class ComplexCacheDisplay extends HttpServlet {
         Iterator<Map.Entry<String, ComplexRecord>> it;
         it = cache.entrySet().iterator();
         while (it.hasNext()) {
- 	    Object value;
-	    try {	
-		System.out.println(">>>>>ComplexCacheDisplay.Get");
-        	value = it.next().getValue();
-	    } catch (Exception e) {
-		System.out.println(">>>>>ComplexCacheDisplay.Get (retry)");
-		System.out.println(">>>>>ComplexCacheDisplay.Get retry reason:" + e);
-		value = it.next().getValue();
-   	    } 
-
+            Object value;
+            Map.Entry entry = it.next();
+            try {       
+                System.out.println(">>>>>ComplexCacheDisplay.Get");
+                value = entry.getValue();
+            } catch (Exception e) {
+                System.out.println(">>>>>ComplexCacheDisplay.Get (retry)");
+                System.out.println(">>>>>ComplexCacheDisplay.Get retry reason:" + e);
+                value = entry.getValue();
+            } 
+            
             out.println(value + "->" + value.getClass().getClassLoader() );
             out.println("</br>");
         }

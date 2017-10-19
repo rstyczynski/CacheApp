@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>CacheApp</groupId>
+  <artifactId>CacheGARAppAlt</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <description>Project for CacheGARAppAlt</description>
+  <packaging>ear</packaging>
+
+  <dependencies>
+      <dependency>
+        <groupId>CacheApp</groupId>
+        <artifactId>CacheGAR</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <type>gar</type>
+        <scope>optional</scope>
+      </dependency>
+    <dependency>
+      <groupId>CacheApp</groupId>
+      <artifactId>CacheWebClientAlt</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+		   <packagingIncludes>META-INF/**,**/Cache*-*.war,**/Cache*-*.gar</packagingIncludes>
+                    <archive>
+                        <manifest>
+ 			    <!-- do not update manifest classpath -->
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                    </archive>
+                    <artifactTypeMappings>
+                  	<artifactTypeMapping type="gar" mapping="jar"/>
+               	    </artifactTypeMappings>
+                </configuration>
+            </plugin>
+
+            <plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-dependency-plugin</artifactId>
+             <executions>
+                <execution>
+                    <id>copy-gar-locally</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                       <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                       <artifactItems>
+                           <artifactItem>
+                              <groupId>CacheApp</groupId>
+                              <artifactId>CacheGAR</artifactId>
+                              <version>1.0-SNAPSHOT</version>
+                              <type>gar</type>
+                          </artifactItem>
+                      </artifactItems>
+                    </configuration>
+                  </execution>
+               </executions>
+          </plugin> 
+    </plugins>
+  </build>
+</project>
