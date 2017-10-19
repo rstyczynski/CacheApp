@@ -4,21 +4,27 @@ import com.tangosol.io.pof.PofReader;
 import com.tangosol.io.pof.PofWriter;
 import com.tangosol.io.pof.PortableObject;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 
-public class TrivialRecord implements Serializable, PortableObject {
+public class ComplexRecord implements Serializable, PortableObject {
     
-    private static final long serialVersionUID = 0xc877ca7fL;
+    private static final long serialVersionUID = 0xc877ca72L;
     private String value;
+    private SubElementRecord valueSub;
     
-    public TrivialRecord(){
+    public ComplexRecord(){
         super();
     }
 
-    public TrivialRecord(String _value) {
+    public ComplexRecord(String _value) {
         this.value = _value;
-        System.out.println(">>>>>Serializer initialized. Done.");
+        System.out.println(">>>>>ComplexRecord.Serializer initialized. Done.");
     }
     
 
@@ -38,15 +44,16 @@ public class TrivialRecord implements Serializable, PortableObject {
     @Override
     public void writeExternal(PofWriter pofWriter) throws IOException {
         pofWriter.writeString(0, value);
+        pofWriter.writeObject(1, valueSub);
         
-        System.out.println(">>>>>Record.writeExternal. Done.");
+        System.out.println(">>>>>ComplexRecord.writeExternal. Done.");
     }
     
     @Override
     public void readExternal(PofReader pofReader) throws IOException {
         value = pofReader.readString(0);
         
-        System.out.println(">>>>>Record.readExternal. Done.");
+        System.out.println(">>>>>ComplexRecord.readExternal. Done.");
     }
 
     @SuppressWarnings("unchecked")
