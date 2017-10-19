@@ -8,6 +8,11 @@
         <!--<load-on-startup>1</load-on-startup> -->
     </servlet>
     <servlet>
+        <servlet-name>ComplexDisplay</servlet-name>
+        <servlet-class>view.ComplexCacheDisplay</servlet-class>
+        <!--<load-on-startup>1</load-on-startup> -->
+    </servlet>
+    <servlet>
         <servlet-name>CacheWarmer</servlet-name>
         <servlet-class>view.TrivialCacheWarmer</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -15,6 +20,10 @@
     <servlet-mapping>
         <servlet-name>CacheDisplay</servlet-name>
         <url-pattern>/CacheDisplay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComplexDisplay</servlet-name>
+        <url-pattern>/ComplexDisplay</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CacheWarmer</servlet-name>

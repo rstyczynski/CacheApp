@@ -10,6 +10,11 @@
             <cache-name>trivialCache</cache-name>
             <scheme-name>trivialReplicatedServiceScheme</scheme-name>
         </cache-mapping>
+
+        <cache-mapping>
+            <cache-name>complexCache</cache-name>
+            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
+        </cache-mapping>
     </caching-scheme-mapping>
     
     <caching-schemes>
