@@ -15,7 +15,7 @@
     <servlet>
         <servlet-name>CacheWarmer</servlet-name>
         <servlet-class>view.TrivialCacheWarmer</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <!--load-on-startup>1</load-on-startup-->
     </servlet>
     <servlet-mapping>
         <servlet-name>CacheDisplay</servlet-name>

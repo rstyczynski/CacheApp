@@ -46,7 +46,7 @@ public class ComplexCacheDisplay extends HttpServlet {
         out.println("<body>");
         out.println("<p/>");
 
-        NamedCache cache = CacheFactory.getCache("trivialCache");
+        NamedCache cache = CacheFactory.getCache("complexCache");
 
         Iterator<Map.Entry<String, ComplexRecord>> it;
         it = cache.entrySet().iterator();
