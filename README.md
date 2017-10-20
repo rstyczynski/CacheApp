@@ -458,7 +458,7 @@ java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblo
 ```
 
 ### 2.1. check result
-- in deployments session
+    - in deployments session
 
 ```bash
 curl http://localhost:9001/CacheGARClientAlt/ComplexDisplay
@@ -498,7 +498,7 @@ curl http://localhost:9001/CacheGARClientAlt/ComplexDisplay
 ```
 
 ## 3. Undeploy apps
-- in deployments session
+    - in deployments session
 
 ```bash
 java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheGARApp-1.0-SNAPSHOT -undeploy -targets Server-0
@@ -507,7 +507,7 @@ java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblo
 ```
 
 ## 4. kill Server-0 node
-- in Server-0 session
+    - in Server-0 session
 
 ```bash
 kill %1
@@ -515,6 +515,8 @@ kill %1
 
 # E. Long running test with Replicated cache
     During this test you will see a lot of "unknown user type" errors
+
+## run test load
 
 ```bash
 while [ 1 ]; do
@@ -526,9 +528,20 @@ while [ 1 ]; do
 done
 ```
 
+## check errors in lo file
+    - i Server-0 session
+    
+```bash
+cat $DOMAIN_HOME/servers/Server-0/logs/Server-0.out | grep "Get" | wc -l
+cat $DOMAIN_HOME/servers/Server-0/logs/Server-0.out | grep "unknown user" | wc -l
+```
+
 # F. Long running test with Distributed cache
     This test shows no problems with POF
 
+## run test load
+    - in deployments session
+    
 ```bash
 while [ 1 ]; do
    arr[0]="GAR"; arr[1]="Web"; rand=$[ $RANDOM % 2 ]; CFG=${arr[$rand]}
@@ -539,6 +552,13 @@ while [ 1 ]; do
 done
 ```
 
+## check errors in lo file
+    - i Server-0 session
+
+```bash
+cat $DOMAIN_HOME/servers/Server-0/logs/Server-0.out | grep "Get" | wc -l
+cat $DOMAIN_HOME/servers/Server-0/logs/Server-0.out | grep "unknown user" | wc -l
+```
 
 
 
