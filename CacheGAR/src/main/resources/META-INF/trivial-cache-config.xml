@@ -13,7 +13,7 @@
 
         <cache-mapping>
             <cache-name>complexCache</cache-name>
-            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
+            <scheme-name>trivialDistributedServiceScheme</scheme-name>
         </cache-mapping>
     </caching-scheme-mapping>
     

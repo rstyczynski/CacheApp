@@ -25,7 +25,7 @@ Features: AsynchDNS IPv6 Largefile GSS-API Kerberos SPNEGO NTLM NTLM_WB SSL libz
 WebLogic fmw_12.2.1.2.0_wls_Disk1_1of1.zip
 
 
-# Procedure
+# A. Installation and configuration
 
 ## 1. Open three terminal sessions
 a) first for Admin
@@ -188,33 +188,49 @@ EOF
 java weblogic.WLST tmp/prepareDomain.wlst 
 ```
 
+```bash
+mkdir $DOMAIN_HOME/servers/Server-0
+mkdir $DOMAIN_HOME/servers/Server-0/security
+echo "username=weblogic
+password=welcome1" > $DOMAIN_HOME/servers/Server-0/security/boot.properties
+```
+
+
+# B.  Start servers
+
+## 7. start Admin
+    - in Admin session
+
+```bash
+source setAppEnv.sh
+$DOMAIN_HOME/bin/startWebLogic.sh
+```
+
 ## 9. start Server-0
     - in Server-0 session
 
-
 ```bash
-source setAppEnv.sh 
-export JAVA_OPTIONS="-Dtangosol.coherence.cacheconfig=$APP_HOME/CacheConfig/etc/META-INF/trivial-cache-config.xml"
-
-mkdir $DOMAIN_HOME/servers/Server-0
-mkdir $DOMAIN_HOME/servers/Server-0/security
-echo "username=weblogic 
-password=welcome1" > $DOMAIN_HOME/servers/Server-0/security/boot.properties
-
 function restartWLS {
 kill %1
 rm $DOMAIN_HOME/servers/Server-0/logs/Server-0.*
 mkdir $DOMAIN_HOME/servers/Server-0/logs
 $DOMAIN_HOME/bin/startManagedWebLogic.sh Server-0  http://localhost:7001 2>&1 >$DOMAIN_HOME/servers/Server-0/logs/Server-0.out &
 }
+
+source setAppEnv.sh
+export JAVA_OPTIONS="-Dtangosol.coherence.cacheconfig=$APP_HOME/CacheConfig/etc/META-INF/trivial-cache-config.xml"
+
 restartWLS
 tail -f $DOMAIN_HOME/servers/Server-0/logs/Server-0.out
 ```
 
-## 10. deploy first app
-    - in deployments session
 
-This application will initialise POF structures
+# C.  Test procedure w/o GAR
+    Ensure that system is installed (A) and servers are started (B).
+    
+## 1. deploy first app
+    - in deployments session
+    This application will initialise POF structures
 
 ```bash
 source setAppEnv.sh 
@@ -222,7 +238,7 @@ cd $APP_HOME
 java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheWebApp/target/CacheWebApp-1.0-SNAPSHOT.ear  -targets Server-0
 ```
 
-### 10.1. check result
+### 1.1. check result
     - in deployments session
 
 ```bash
@@ -240,17 +256,16 @@ curl http://localhost:9001/CacheWebClient/CacheDisplay
 </html>
 ```
 
-### 10.2. Check std out of Server-0
+### 1.2. Check std out of Server-0
 
 ```
 >>>>>Serializer initialized. Done.
 >>>>>TrivialListener. Insert:CacheEvent{LocalCache inserted: key=0, value=0 - Zero - Zero}
 ```
 
-### 11. deploy second app
-###    - in deployments session
-###
-###     This application will try to use POF structures
+## 2. deploy second app
+    - in deployments session
+    This application will try to use POF structures
 
 ```bash
 source setAppEnv.sh 
@@ -258,7 +273,7 @@ cd $APP_HOME
 java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheWebAppAlt/target/CacheWebAppAlt-1.0-SNAPSHOT.ear  -targets Server-0
 ```
 
-## 11.1. check result
+### 2.1. check result
     - in deployments session
 
 ```bash
@@ -330,7 +345,7 @@ Caused by: java.lang.IllegalArgumentException: unknown user type: model.TrivialR
 </HTML>
 ```
 
-### 11.2. Check std out of Server-0
+### 2.2. Check std out of Server-0
 
 ```
 >>>>>Serializer initialized. Done.
@@ -360,8 +375,7 @@ Caused By: java.lang.IllegalArgumentException: unknown user type: model.TrivialR
 > 
 ```
 
-
-## 12. Undeploy apps
+## 3. Undeploy apps
     - in deployments session
 
 ```bash
@@ -372,11 +386,157 @@ java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblo
 java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheWebAppAlt-1.0-SNAPSHOT -undeploy -targets Server-0
 ```
 
-## 13. kill Server-0 node
+## 4. kill Server-0 node
     - in Server-0 session
 
 ```bash
 kill %1
+```
+
+
+# D. Test procedure with GAR and complex object
+    Ensure that system is:
+    1. installed (A),
+    2. ervers are started (B),
+    3. you are in CacheApp directory
+
+## 1. Build test code
+
+```bash
+source setAppEnv.sh
+mvn clean package
+```
+
+## 2. deploy first app
+    - in deployments session
+    This application will initialise POF structures
+
+```bash
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheGARApp/target/CacheGARApp-1.0-SNAPSHOT.ear  -targets Server-0
+```
+
+### 1.1. check result
+    - in deployments session
+
+```bash
+curl http://localhost:9001/CacheGARClient/ComplexDisplay
+```
+
+```html
+<html>
+<head><title>Cache reader</title></head>
+<body>
+<p/>
+0 - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@5dbf5aa finder: weblogic.utils.classloaders.CodeGenClassFinder@760147c9 annotation: CacheGARApp-1.0-SNAPSHOT@
+</br>
+<h1>Cloned</h1>
+0 - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@5dbf5aa finder: weblogic.utils.classloaders.CodeGenClassFinder@760147c9 annotation: CacheGARApp-1.0-SNAPSHOT@
+</br>
+</body>
+</html>
+```
+
+### 1.2. Check std out of Server-0
+    -in Server-0 session
+    
+```
+>>>>>ComplexRecord.Serializer initialized. Done.
+>>>>>ComplexCacheDisplay.Put0 - Zero - Zero
+>>>>>ComplexRecord.writeExternal. Done.
+>>>>>TrivialListener. Insert:CacheEvent{LocalCache inserted: key=Binary(length=9, value=0x0DD6E6AE34154E0130), value=Binary(length=25, value=0x15AC0F00004E0F30202D205A65726F202D205A65726F016440)}
+>>>>>ComplexCacheDisplay.Get
+>>>>>ComplexRecord.readExternal. Done.
+>>>>>ComplexRecord.readExternal. Done.
+```
+
+## 2. deploy second app
+    - in deployments session
+    This application will try to use POF structures
+
+```bash
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -remote -upload -deploy CacheGARAppAlt/target/CacheGARAppAlt-1.0-SNAPSHOT.ear  -targets Server-0
+```
+
+### 2.1. check result
+- in deployments session
+
+```bash
+curl http://localhost:9001/CacheGARClientAlt/ComplexDisplay
+```
+
+```html
+<html>
+<head><title>Cache reader</title></head>
+<body>
+<p/>
+0A - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@58c8d9ec finder: weblogic.utils.classloaders.CodeGenClassFinder@30d2c666 annotation: CacheGARAppAlt-1.0-SNAPSHOT@
+</br>
+0 - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@58c8d9ec finder: weblogic.utils.classloaders.CodeGenClassFinder@30d2c666 annotation: CacheGARAppAlt-1.0-SNAPSHOT@
+</br>
+<h1>Cloned</h1>
+0A - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@58c8d9ec finder: weblogic.utils.classloaders.CodeGenClassFinder@30d2c666 annotation: CacheGARAppAlt-1.0-SNAPSHOT@
+</br>
+0 - Zero - Zero->weblogic.utils.classloaders.GenericClassLoader@58c8d9ec finder: weblogic.utils.classloaders.CodeGenClassFinder@30d2c666 annotation: CacheGARAppAlt-1.0-SNAPSHOT@
+</br>
+</body>
+</html>
+```
+
+### 2.2. Check std out of Server-0
+
+```
+>>>>>ComplexRecord.Serializer initialized. Done.
+>>>>>ComplexCacheDisplay.Put0A - Zero - Zero
+>>>>>ComplexRecord.writeExternal. Done.
+>>>>>TrivialListener. Insert:CacheEvent{LocalCache inserted: key=Binary(length=11, value=0x0D85B2FDF006154E023041), value=Binary(length=26, value=0x15AC0F00004E103041202D205A65726F202D205A65726F016440)}
+>>>>>ComplexCacheDisplay.Get
+>>>>>ComplexRecord.readExternal. Done.
+>>>>>ComplexCacheDisplay.Get
+>>>>>ComplexRecord.readExternal. Done.
+>>>>>ComplexRecord.readExternal. Done.
+>>>>>ComplexRecord.readExternal. Done.
+```
+
+## 3. Undeploy apps
+- in deployments session
+
+```bash
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheGARApp-1.0-SNAPSHOT -undeploy -targets Server-0
+java -cp $CLASSPATH weblogic.Deployer  -adminurl t3://localhost:7001 -user weblogic -password welcome1  -name CacheGARAppAlt-1.0-SNAPSHOT -undeploy -targets Server-0
+
+```
+
+## 4. kill Server-0 node
+- in Server-0 session
+
+```bash
+kill %1
+```
+
+# E. Long running test with Replicated cache
+    During this test you will see a lot of "unknown user type" errors
+
+```bash
+while [ 1 ]; do
+   arr[0]="GAR"; arr[1]="Web"; rand=$[ $RANDOM % 2 ]; CFG=${arr[$rand]}
+   arr[0]=""; arr[1]="Alt"; rand=$[ $RANDOM % 2 ]; APP=${arr[$rand]}
+   echo $CFG, $APP
+   curl http://localhost:9001/Cache$CFG\Client$APP\/CacheDisplay
+   sleep 0.$RANDOM
+done
+```
+
+# F. Long running test with Distributed cache
+    This test shows no problems with POF
+
+```bash
+while [ 1 ]; do
+   arr[0]="GAR"; arr[1]="Web"; rand=$[ $RANDOM % 2 ]; CFG=${arr[$rand]}
+   arr[0]=""; arr[1]="Alt"; rand=$[ $RANDOM % 2 ]; APP=${arr[$rand]}
+   echo $CFG, $APP
+   curl http://localhost:9001/Cache$CFG\Client$APP\/ComplexDisplay
+   sleep 0.$RANDOM
+done
 ```
 
 

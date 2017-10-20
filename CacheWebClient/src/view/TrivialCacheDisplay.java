@@ -24,6 +24,7 @@ public class TrivialCacheDisplay extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         
+        CacheFactory.ensureCluster();
         NamedCache cache = CacheFactory.getCache("trivialCache");
 	TrivialRecord record = new TrivialRecord("0 - Zero - Zero");
 	try {	
@@ -34,6 +35,8 @@ public class TrivialCacheDisplay extends HttpServlet {
 		System.out.println(">>>>>Put retry reason:" + e);
 		cache.put("0", record);
 	} 
+        
+        cache.release();
     }
 
     @SuppressWarnings("unchecked")
@@ -52,13 +55,14 @@ public class TrivialCacheDisplay extends HttpServlet {
         it = cache.entrySet().iterator();
         while (it.hasNext()) {
  	    Object value;
+            Map.Entry entry = it.next();
 	    try {	
 		System.out.println(">>>>>Get");
-        	value = it.next().getValue();
+	        value = entry.getValue();
 	    } catch (Exception e) {
 		System.out.println(">>>>>Get (retry)");
 		System.out.println(">>>>>Get retry reason:" + e);
-		value = it.next().getValue();
+   	        value = entry.getValue();
    	    } 
 
             out.println(value + "->" + value.getClass().getClassLoader() );
@@ -74,6 +78,7 @@ public class TrivialCacheDisplay extends HttpServlet {
             out.println("</br>");
         }
 
+        cache.release();
 
 
         out.println("</body>");

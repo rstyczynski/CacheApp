@@ -24,6 +24,7 @@ public class TrivialCacheDisplay extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         
+        CacheFactory.ensureCluster();
         NamedCache cache = CacheFactory.getCache("trivialCache");
 	TrivialRecord record = new TrivialRecord("0A - Zero A - Zero A");
 	try {	
@@ -34,6 +35,8 @@ public class TrivialCacheDisplay extends HttpServlet {
 		System.out.println(">>>>>Put retry reason:" + e);
 		cache.put("0A", record);
 	} 
+        
+        cache.release();
 	
     }
 
@@ -48,20 +51,22 @@ public class TrivialCacheDisplay extends HttpServlet {
         out.println("<body>");
         out.println("<p/>");
 
+        CacheFactory.ensureCluster();
         NamedCache cache = CacheFactory.getCache("trivialCache");
 
         Iterator<Map.Entry<String, TrivialRecord>> it;
         it = cache.entrySet().iterator();
         while (it.hasNext()) {
- 	    Object value;
-	    try {	
-		System.out.println(">>>>>Get");
-        	value = it.next().getValue();
-	    } catch (Exception e) {
-		System.out.println(">>>>>Get (retry)");
-		System.out.println(">>>>>Get retry reason:" + e);
-		value = it.next().getValue();
-   	    } 
+            Object value;
+            Map.Entry entry = it.next();
+            try {       
+                System.out.println(">>>>>Get");
+                value = entry.getValue();
+            } catch (Exception e) {
+                System.out.println(">>>>>Get (retry)");
+                System.out.println(">>>>>Get retry reason:" + e);
+                value = entry.getValue();
+            } 
 
             out.println(value + "->" + value.getClass().getClassLoader() );
             out.println("</br>");
@@ -77,6 +82,7 @@ public class TrivialCacheDisplay extends HttpServlet {
         }
 
 
+        cache.release();
 
         out.println("</body>");
         out.println("</html>");

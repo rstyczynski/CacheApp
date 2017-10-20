@@ -3,7 +3,7 @@
               xmlns="http://xmlns.oracle.com/coherence/coherence-cache-config"
               xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-cache-config http://xmlns.oracle.com/coherence/coherence-cache-config/1.2/coherence-cache-config.xsd">
     <defaults>
-        <scope-name>trivial-scope</scope-name>
+        <scope-name>CacheGAR</scope-name>
     </defaults>
     <caching-scheme-mapping>
         <cache-mapping>
@@ -13,7 +13,7 @@
 
         <cache-mapping>
             <cache-name>complexCache</cache-name>
-            <scheme-name>trivialReplicatedServiceScheme</scheme-name>
+            <scheme-name>trivialDistributedServiceScheme</scheme-name>
         </cache-mapping>
     </caching-scheme-mapping>
     

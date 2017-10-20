@@ -24,6 +24,7 @@ public class ComplexCacheDisplay extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         
+        CacheFactory.ensureCluster();
         NamedCache cache = CacheFactory.getCache("complexCache");
 	ComplexRecord record = new ComplexRecord("0A - Zero - Zero");
 	try {	
@@ -34,6 +35,8 @@ public class ComplexCacheDisplay extends HttpServlet {
 		System.out.println(">>>>>ComplexCacheDisplay.Put retry reason:" + e);
 		cache.put("0A", record);
 	} 
+        cache.release();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +49,7 @@ public class ComplexCacheDisplay extends HttpServlet {
         out.println("<body>");
         out.println("<p/>");
 
+        CacheFactory.ensureCluster();
         NamedCache cache = CacheFactory.getCache("complexCache");
 
         Iterator<Map.Entry<String, ComplexRecord>> it;
@@ -74,6 +78,8 @@ public class ComplexCacheDisplay extends HttpServlet {
             out.println(value + "->" + value.getClass().getClassLoader() );
             out.println("</br>");
         }
+        
+        cache.release();
 
         out.println("</body>");
         out.println("</html>");
