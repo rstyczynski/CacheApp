@@ -40,7 +40,6 @@ Change directory to your working one in each session
 ```bash
 git clone -b User-type-unknown-test-case https://github.com/rstyczynski/CacheApp
 cd CacheApp
-mvn clean package
 ```
 
 ## 3. set env
@@ -193,6 +192,22 @@ mkdir $DOMAIN_HOME/servers/Server-0
 mkdir $DOMAIN_HOME/servers/Server-0/security
 echo "username=weblogic
 password=welcome1" > $DOMAIN_HOME/servers/Server-0/security/boot.properties
+```
+
+## 9. Configure Oracle plugins for Maven
+
+```bash
+cd $ORACLE_HOME/oracle_common/plugins/maven/com/oracle/maven/oracle-maven-sync/12.2.1/
+mvn install:install-file -DpomFile=oracle-maven-sync-12.2.1.pom -Dfile=oracle-maven-sync-12.2.1.jar
+cd -
+mvn com.oracle.maven:oracle-maven-sync:push -DoracleHome=$ORACLE_HOME -DserverId=internal
+mvn archetype:crawl -Dcatalog=$HOME/.m2/archetype-catalog.xm
+```
+
+## 10. Build test program
+
+```bash
+mvn clean package
 ```
 
 
